@@ -14,9 +14,9 @@ app.configure(function () {
 
 app.get('/beers', beer.findAll);
 app.get('/beers/:id', beer.findById);
-app.post('/beers', beer.addWine);
-app.put('/beers/:id', beer.updateWine);
-app.delete('/beers/:id', beer.deleteWine);
+//app.post('/beers', beer.addBeer);
+app.put('/beers/:id', beer.updateBeer);
+//app.delete('/beers/:id', beer.deleteWine);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
