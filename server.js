@@ -1,7 +1,7 @@
 var express = require('express'),
     path = require('path'),
     http = require('http'),
-    wine = require('./routes/wines');
+    beer = require('./routes/beers');
 
 var app = express();
 
@@ -12,11 +12,11 @@ app.configure(function () {
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.get('/wines', wine.findAll);
-app.get('/wines/:id', wine.findById);
-app.post('/wines', wine.addWine);
-app.put('/wines/:id', wine.updateWine);
-app.delete('/wines/:id', wine.deleteWine);
+app.get('/beers', beer.findAll);
+app.get('/beers/:id', beer.findById);
+app.post('/beers', beer.addWine);
+app.put('/beers/:id', beer.updateWine);
+app.delete('/beers/:id', beer.deleteWine);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
