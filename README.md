@@ -1,5 +1,5 @@
-G.I.B.B Responsive Backbone Nodejs Beerrater
-============================================
+GIBBBonanzaSuperResponsiveBootstrapBackboneMobileBeerRater
+==========================================================
 
 
 To run the REST-API:
@@ -9,7 +9,7 @@ To run the REST-API:
 
 - Install MongoDB
 
-- Install mongoDB Node.js driver by running "npm install mongodb"
+- Install MongoDB Node.js driver by running "npm install mongodb"
 
 - Go to /beerrater dir and run "npm install" to install express and other stuff we need
 
