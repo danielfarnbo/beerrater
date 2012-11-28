@@ -16,6 +16,14 @@ db.open(function(err, db) {
                 populateBeerDB();
             }
         });
+
+
+        db.collection('ratings', {}, function(err, collection) {
+            if (!err) {
+                collection.ensureIndex({'user': 1, 'beernr': 1}, {unique: true});        
+            } 
+        });
+        
         // db.collection('ratings', {safe:true}, function(err, collection) {
         //     if (err) {
         //         console.log("The 'ratings' collection doesn't exist. Creating it with sample data...");
