@@ -1,5 +1,5 @@
-GIBBBonanzaSuperResponsiveBootstrapBackboneMobileBeerRater
-==========================================================
+G.I.B.B Bonanza Super Responsive Bootstrap Backbone Mobile Beer Rater
+=====================================================================
 
 
 To run the REST-API:
