@@ -1,7 +1,9 @@
 G.I.B.B Responsive Backbone Nodejs Beerrater
+============================================
 
 
 To run the REST-API:
+--------------------
 
 - Install Node.js
 
@@ -17,7 +19,7 @@ To run the REST-API:
 
 
 API consists of
-
+---------------
 
 GET '/beers', get all beers
 
@@ -37,7 +39,7 @@ GET '/users/:id', get user by id (maybe not necessary?)
 
 
 TODO
-
+----
 
 PUT /ratings, update rating
 
