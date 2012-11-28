@@ -45,7 +45,11 @@ TODO
 
 PUT /ratings, update rating
 
-PUt /users, update user
+PUT /users, update user
+
+GET /ratings/total, get calculated total ratings per beer
+
+GET /users/winner, get the user who's ratings are closest to the calculated total
 
 
 Some good instructions here: http://coenraets.org/blog/2012/10/creating-a-rest-api-using-node-js-express-and-mongodb/
