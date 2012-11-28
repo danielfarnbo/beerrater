@@ -17,6 +17,8 @@ To run the REST-API:
 
 - Start the application by running "node server.js" in the /beerrater dir
 
+- Now the application is running on http://localhost:3000, try it by going to http://localhost:3000/beers
+
 
 API consists of
 ---------------
