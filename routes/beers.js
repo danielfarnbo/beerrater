@@ -23,7 +23,7 @@ db.open(function(err, db) {
         });
 
         db.collection('users', {}, function(err, collection) {
-            collection.ensureIndex({'name': 1}, {unique: true});        
+            collection.ensureIndex({'name': 1}, {unique: true});    
         });
 
     }
@@ -44,7 +44,7 @@ exports.findById = function(req, res) {
 };
 
 exports.findByBeerNr = function(req, res) {
-    var beerno = parseInt(req.params.beerno);
+    var beerno = parseInt(req.params.beerno, 10);
     console.log('Retrieving beer: ' + beerno);
     db.collection('beers', function(err, collection) {
         collection.findOne({'beernr': beerno}, function(err, item) {
@@ -87,6 +87,7 @@ exports.addUser = function(req, res) {
                     res.send({'error':'An error has occurred'});
                 } else {
                     console.log('Success: ' + JSON.stringify(result[0]));
+                    req.session.user_id = result[0]._id;
                     res.send(result[0]);
                 }
             });
@@ -104,12 +105,16 @@ exports.findAllUsers = function(req, res) {
     });
 };
 
-exports.findUserById = function(req, res) {
+exports.findUserById = function(req, res, next) {
     var id = req.params.id;
     console.log('Retrieving user: ' + id);
     db.collection('users', function(err, collection) {
         collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
-            res.send(item);
+            if (next) {
+                next(item);
+            } else {
+                res.send(item);
+            }
         });
     });
 };
@@ -171,7 +176,7 @@ exports.addRating = function(req, res) {
                                 });
                             });
                 } else {
-                    res.send('rating not allowed. err: ' + err + ' user: ' + item);
+                    res.send('Rating not allowed. err: ' + err + ' user: ' + item);
                 }
             });
         });
@@ -189,12 +194,31 @@ exports.findAllRatings = function(req, res) {
 };
 
 exports.findRatingByBeerIdAndUserId = function(req, res) {
-    var beerno = parseInt(req.params.beerno),
+    var beerno = parseInt(req.params.beerno, 10),
         userid = req.params.userid;
     console.log('Retrieving rating: ', beerno, userid);
     db.collection('ratings', function(err, collection) {
         collection.findOne({'beernr': beerno, 'user': userid}, function(err, item) {
             res.send(item);
+        });
+    });
+};
+
+exports.updateRating = function(req, res) {
+    var id = req.params.id;
+    var rating = req.body;
+    delete rating._id;
+    console.log('Updating rating: ' + id);
+    console.log(JSON.stringify(rating));
+    db.collection('ratings', function(err, collection) {
+        collection.update({'_id':new BSON.ObjectID(id)}, rating, {safe:true}, function(err, result) {
+            if (err) {
+                console.log('Error updating rating: ' + err);
+                res.send({'error':'An error has occurred'});
+            } else {
+                console.log('' + result + ' rating updated');
+                res.send(rating);
+            }
         });
     });
 };

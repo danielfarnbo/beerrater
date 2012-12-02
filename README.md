@@ -35,6 +35,8 @@ GET '/ratings', get all ratings
 
 GET '/ratings/:beernr/:userid', get rating by userid and beernr
 
+PUT /ratings/:id, update rating
+
 POST '/users', add user
 
 GET '/users', get all users
@@ -44,8 +46,6 @@ GET '/users/:id', get user by id (maybe not necessary?)
 
 TODO
 ----
-
-PUT /ratings, update rating
 
 PUT /users, update user
 
