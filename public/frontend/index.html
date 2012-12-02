@@ -1,32 +1,60 @@
 <!DOCTYPE html> 
 <html> 
-<head> 
-	<title>G.I.B.B Bonanza Rater</title> 
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<meta charset="UTF-8">
-	
-	<link rel="stylesheet" href="resources/css/jquery-mobile.css" />
-	<link rel="stylesheet" href="resources/css/reset.css" />
-	<link rel="stylesheet" href="resources/css/styles.css" />
-</head> 
-<body> 
-	<div data-role="page" id="page">
-		<div data-role="header">
-		<h1>G.I.B.B Bonanza Rater</h1>
-	</div><!-- /header -->
+	<head> 
+		<title>G.I.B.B Bonanza Rater</title> 
+		<meta name="viewport" content="width=device-width, initial-scale=1"> 
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html"; charset="ISO-8859-1">
+		
+		<link rel="stylesheet" href="resources/css/jquery-mobile.css" />
+		<link rel="stylesheet" href="resources/css/reset.css" />
+		<link rel="stylesheet" href="resources/css/styles.css" />
+	</head> 
+	<body> 
+		<div data-role="page" id="page">
+			<div data-role="header">
+			<h1>G.I.B.B Bonanza Rater</h1>
+		</div><!-- /header -->
 
-	<div data-role="content">	
-		<ul data-role="listview" data-inset="true" id="beerIndex" >
+		<div data-role="content">	
+			<ul data-role="listview" data-inset="true" id="beerIndex" >
 			</ul>		
-	</div><!-- /content -->
-	</div>
-	<script src="resources/js/jquery-1.8.3.min.js"></script>	
-	<script src="resources/js/underscore-min.js"></script>
-	<script src="resources/js/bootstrap.min.js"></script>
-	<script src="resources/js/backbone.js"></script>
-	<script src="resources/js/model/model.js"</script>
-	<script src="resources/js/jquery-tmpl.js"></script>
-	<script src="resources/js/jquery.mobile-1.2.0.js"></script>
-	<script src="resources/js/functions.js"></script>
-</body>
+		</div><!-- /content -->
+		</div>
+		<script src="resources/js/jquery-1.8.3.min.js"></script>	
+		<script src="resources/js/underscore-min.js"></script>
+		<script src="resources/js/bootstrap.min.js"></script>
+		<script src="resources/js/backbone.js"></script>
+		<script src="resources/js/model/model.js"></script>
+		<script src="resources/js/views/indexview.js"></script>
+		<script src="resources/js/templates/templates.js"></script>
+		<script src="resources/js/jquery.mobile-1.2.0.js"></script>
+		<script src="resources/js/functions.js"></script>
+		
+		<script type="text/template" id="presentation_template">
+			<div id="beerPresentation">
+				<div title="back to all beers"><a href="index.html"><i class="icon-layout"></i></a></duv>
+				<div title="Previous"><a href=""><i class="icon-left-open-big"></i></a></div>
+				<div>
+					<h1>RATE THIS BEER</h1>
+					<section id="#templateContent">
+						<img src="<%= picture %>">
+						<p><"%= name %"> ("<%= abv %>%")</p>
+						<p>"<%= brewery %>"</p>
+					</section>
+				</div>
+				<div title="Next"><a href="#"><i class="icon-right-open-big"></i></a></div>
+			</div>
+		</script>
+		<script type="text/template" id="index_template">
+			<li>
+				<img src="<%= picture %>" alt="" />
+				<section>
+					<p>"<%= name %>(<%= abv %>%")</p>
+					<p>"<%= brewery %>"</p>
+				</section>
+			</li>
+		</script>
+	</body>
+	
 </html>

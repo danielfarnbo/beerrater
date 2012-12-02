@@ -1,0 +1,1 @@
+var IndexView = Backbone.View.extend({	render: function(collection){			for( var i = 0; i < collection.length; i++ )		{			var model = collection.at(i);			 var template = _.template( $("#index_template").html(), model.attributes );			// Load the compiled HTML into the Backbone "el"			this.$el.append( template );		}		}});
