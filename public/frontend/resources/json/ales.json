@@ -1,17 +1,17 @@
-[
+ï»¿[
   {
-    "name": "Oppigårds Winter Ale",
+    "name": "OppigÃ¥rds Winter Ale",
     "picture": "anchor.jpg",
     "abv": 5.9,
-    "brewery": "Oppigårds",
+    "brewery": "OppigÃ¥rds",
     "beernr": 1,
     "_id": "50bb52276f55217531000001"
   },
   {
-    "name": "Jólabjór",
+    "name": "JÃ³labjÃ³r",
     "abv": 5.9,
     "picture": "anchor.jpg",
-    "brewery": "&Ouml;lvisholt Brugghús",
+    "brewery": "Ã–lvisholt Brugghus",
     "beernr": 2,
     "_id": "50bb52276f55217531000002"
   },

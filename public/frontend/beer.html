@@ -1,0 +1,34 @@
+<body>
+	<h1>G.I.B.B Bonanza Rater</h1>
+	<div id="beer" >
+	</div>
+		
+	<script type="text/javascript">	
+		
+		window.beerView = new BeerView({
+			el:"#beer"
+		});
+		window.beerView.on("nextBeer", nextBeer);
+		window.beerView.on("prevBeer", nextBeer);
+		window.beerView.on("back", back);
+		window.beerView.render(window.beerCollection.getCurrentBeer());
+		
+		function nextBeer(){
+			
+			var nextIndex = window.beerCollection.getCurrentBeer().get("index");
+			window.beerCollection.setCurrentBeer(nextIndex + 1);
+			window.beerView.render(window.beerCollection.getCurrentBeer());
+		}
+		
+		function prevBeer(){
+			var nextIndex = window.beerCollection.getCurrentBeer().get("index");
+			window.beerCollection.setCurrentBeer(nextIndex - 1);
+			window.beerView.render(window.beerCollection.getCurrentBeer());
+		}
+		
+		function back(){
+			window.beerCollection.setCurrentBeer(undefined);
+			console.log(window.beerCollection.getCurrentBeer());
+		}
+	</script>
+</body>

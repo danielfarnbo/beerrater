@@ -119,11 +119,6 @@
 	background-image:      -o-linear-gradient( #555 /*{a-bhover-background-start}*/, #383838 /*{a-bhover-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #555 /*{a-bhover-background-start}*/, #383838 /*{a-bhover-background-end}*/);
 }
-.ui-btn-hover-a:visited,
-.ui-btn-hover-a:hover,
-.ui-btn-hover-a a.ui-link-inherit {
-	color: 					#fff /*{a-bhover-color}*/;
-}
 .ui-btn-down-a {
 	border: 1px solid 		#000 /*{a-bdown-border}*/;
 	background: 			#222 /*{a-bdown-background-color}*/;
@@ -136,13 +131,7 @@
 	background-image:     -ms-linear-gradient( #202020 /*{a-bdown-background-start}*/, #2c2c2c /*{a-bdown-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #202020 /*{a-bdown-background-start}*/, #2c2c2c /*{a-bdown-background-end}*/); /* Opera 11.10+ */
 	background-image:         linear-gradient( #202020 /*{a-bdown-background-start}*/, #2c2c2c /*{a-bdown-background-end}*/);
-}
-.ui-btn-down-a:visited,
-.ui-btn-down-a:hover,
-.ui-btn-down-a a.ui-link-inherit {
-	color: 					#fff /*{a-bdown-color}*/;
-}
-.ui-btn-up-a,
+}.ui-btn-up-a,
 .ui-btn-hover-a,
 .ui-btn-down-a {
 	font-family: Helvetica, Arial, sans-serif /*{global-font-family}*/;

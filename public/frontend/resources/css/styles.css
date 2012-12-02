@@ -10,6 +10,20 @@ h1{
 	text-align:center;
 	margin:0;
 	color:#000;
+	background-color:#FFF;
+	margin-bottom:1em;
+	margin-top:.2em;
+	-moz-box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 			rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
+	box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
+}
+
+h2{
+	font-family:'SFShaiFontaiDistressedRegular';
+	font-size:3em !important;
+	text-align:center;
+	margin:0;
+	color:#000;
 }
 
 div.ui-header{
@@ -58,41 +72,53 @@ div.ui-header{
 	height:100%;
 }
 
-.beer:active  { color:#000; }
-.beer:visited { color:#000; }
+link:active  { color:#000; }
+link:visited { color:#000; }
+link:hover   {color:#000; }
 
-.beerPresentation{
+#beer{
 	text-align:center;
 }
 
-.beerPresentation p{
+#beer p{
 	font-family:'ImpactLabelRegular';
 	font-size:3em;
 	margin-top:0px;
 	margin-bottom:5px;
 }
 
-.beerPresentation section{
+#beer section{
 	margin-top:20px;
 }
 
-.beerPresentation input{
-	margin-top:10px;
+#beer input{
+	margin-top:0px;
 	font-family:'SFShaiFontaiExtendedRegular';
-	font-size:1.8em;
+	font-size:1.1em;
+	height:20px;
 }
 
-.beerPresentation label{
-	margin-top:10px;
+#beer label{
+	margin-top:5px;
+	margin-right:25px;
+	margin-bottom:20px;
 	font-family:'SFShaiFontaiExtendedRegular';
-	font-size:1.8em;
+	font-size:1.1em;
 	border:0;
 }
 
-.beerPresentation div{
+#beer div{
 	display:inline-block;
 	vertical-align:middle;
+	
+}
+
+#beerArea{
 	background-color:#FFF;
+	width:80%;
+	-moz-box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 			rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
+	-webkit-box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
+	box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
 }
 
 #drinking{
@@ -100,7 +126,7 @@ div.ui-header{
 	margin-left:20px;
 }
 
-#presentation{
+#beer{
 	background-image=none;
 	background-color=#FFF;
 }
@@ -204,7 +230,7 @@ div.ui-header{
 }
 
 .icon-info:before { content: '\2139'; } /* '?' */
-.icon-layout:before { content: '\268f'; font-size:300%; color:#000; position:absolute;} /* '?' */
+.icon-layout:before { content: '\268f'; font-size:300%; color:#000; position:absolute; top:30px;} /* '?' */
 .icon-cancel-circled:before { content: '\2716'; } /* '?' */
 .icon-plus-circled:before { content: '\2795'; } /* '?' */
 .icon-info-circled:before { content: '\e705'; } /* '?' */
