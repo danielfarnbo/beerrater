@@ -5,22 +5,53 @@ var express = require('express'),
 
 var app = express();
 
+var integer = function (v) {
+	return parseInt(v, 10);
+}
+
+var checkLogin = function (req, res, next) {
+	console.log('check login');
+	if (req.session.user_id) {
+		req.params.id = req.session.user_id;
+	    beer.findUserById(req, res, function(user) {
+			if (user) {
+				req.currentUser = user;
+				console.log('Logged in as ', user.name);
+				next();
+			} else {
+				res.redirect('/hello');
+			}
+		});
+	} else {
+		res.redirect('/hello');
+	}
+}
+
+
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
     app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
-    app.use(express.bodyParser()),
+    app.use(express.bodyParser());
+    app.use(express.cookieParser());
+    app.use(express.session({secret: 'FASTFIVEFOREVER!!!'}));
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.get('/beers', beer.findAll);
-app.get('/beers/:id', beer.findById);
-app.get('/beers/nr/:beerno', beer.findByBeerNr);
+// app.param(':beerno', integer);
+
+app.get('/hello', function(req, res){
+  res.send('Hello World');
+});
+app.get('/beers', checkLogin, beer.findAll);
+app.get('/beers/:id', checkLogin, beer.findById);
+app.get('/beers/nr/:beerno', checkLogin, beer.findByBeerNr);
 //app.post('/beers', beer.addBeer);
-app.put('/beers/:id', beer.updateBeer);
+// app.put('/beers/:id', beer.updateBeer);
 //app.delete('/beers/:id', beer.deleteWine);
-app.post('/ratings', beer.addRating);
-app.get('/ratings', beer.findAllRatings);
-app.get('/ratings/:beerno/:userid', beer.findRatingByBeerIdAndUserId);
+app.post('/ratings', checkLogin, beer.addRating);
+app.get('/ratings', checkLogin, beer.findAllRatings);
+app.get('/ratings/:beerno/:userid', checkLogin, beer.findRatingByBeerIdAndUserId);
+app.put('/ratings/:id', checkLogin, beer.updateRating);
 app.post('/users', beer.addUser);
 app.get('/users', beer.findAllUsers);
 app.get('/users/:id', beer.findUserById);
