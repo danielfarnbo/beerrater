@@ -20,6 +20,7 @@ app.put('/beers/:id', beer.updateBeer);
 //app.delete('/beers/:id', beer.deleteWine);
 app.post('/ratings', beer.addRating);
 app.get('/ratings', beer.findAllRatings);
+app.get('/ratings/:beerno/:userid', beer.findRatingByBeerIdAndUserId);
 app.post('/users', beer.addUser);
 app.get('/users', beer.findAllUsers);
 app.get('/users/:id', beer.findUserById);

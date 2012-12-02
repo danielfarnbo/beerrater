@@ -25,13 +25,7 @@ db.open(function(err, db) {
         db.collection('users', {}, function(err, collection) {
             collection.ensureIndex({'name': 1}, {unique: true});        
         });
-        
-        // db.collection('ratings', {safe:true}, function(err, collection) {
-        //     if (err) {
-        //         console.log("The 'ratings' collection doesn't exist. Creating it with sample data...");
-        //         populateRatingDB();
-        //     }
-        // });
+
     }
 });
 
@@ -50,7 +44,7 @@ exports.findById = function(req, res) {
 };
 
 exports.findByBeerNr = function(req, res) {
-    var beerno = req.params.beerno;
+    var beerno = parseInt(req.params.beerno);
     console.log('Retrieving beer: ' + beerno);
     db.collection('beers', function(err, collection) {
         collection.findOne({'beernr': beerno}, function(err, item) {
@@ -194,6 +188,17 @@ exports.findAllRatings = function(req, res) {
     });
 };
 
+exports.findRatingByBeerIdAndUserId = function(req, res) {
+    var beerno = parseInt(req.params.beerno),
+        userid = req.params.userid;
+    console.log('Retrieving rating: ', beerno, userid);
+    db.collection('ratings', function(err, collection) {
+        collection.findOne({'beernr': beerno, 'user': userid}, function(err, item) {
+            res.send(item);
+        });
+    });
+};
+
 /*--------------------------------------------------------------------------------------------------------------------*/
 // Populate database with sample data -- Only used once: the first time the application is started.
 // You'd typically not find this code in a real-life app, since the database would already exist.
@@ -205,21 +210,21 @@ var populateBeerDB = function() {
         picture: "saint_cosme.jpg",
         abv: 5.9,
         brewery: "Oppigårds",
-        beernr: "0"
+        beernr: 1
     },
     {
         name: "Jólabjór",
         abv: 5.9,
         picture: "saint_cosme.jpg",
         brewery: "Ölvisholt Brugghús",
-        beernr: "1"
+        beernr: 2
     },
     {
         name: "Anchor Christmas Ale",
         picture: "saint_cosme.jpg",
         abv: 5.5,
         brewery: "Anchor Brewing",
-        beernr: "3"
+        beernr: 3
     }];
 
     db.collection('beers', function(err, collection) {
