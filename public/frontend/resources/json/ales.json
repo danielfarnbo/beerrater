@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Oppigårds Winter Ale",
+    "picture": "anchor.jpg",
+    "abv": 5.9,
+    "brewery": "Oppigårds",
+    "beernr": 1,
+    "_id": "50bb52276f55217531000001"
+  },
+  {
+    "name": "Jólabjór",
+    "abv": 5.9,
+    "picture": "anchor.jpg",
+    "brewery": "Ölvisholt Brugghús",
+    "beernr": 2,
+    "_id": "50bb52276f55217531000002"
+  },
+  {
+    "name": "Anchor Christmas Ale",
+    "picture": "anchor.jpg",
+    "abv": 5.5,
+    "brewery": "Anchor Brewing",
+    "beernr": 3,
+    "_id": "50bb52276f55217531000003"
+  }
+]
