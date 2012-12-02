@@ -33,6 +33,8 @@ POST '/ratings', add rating
 
 GET '/ratings', get all ratings
 
+GET '/ratings/:beernr/:userid', get rating by userid and beernr
+
 POST '/users', add user
 
 GET '/users', get all users
