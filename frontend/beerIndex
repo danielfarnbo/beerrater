@@ -1,0 +1,14 @@
+<body id="index">
+	<div data-role="page">
+
+	<div data-role="header">
+		<h1>G.I.B.B Bonanza Rater</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">	
+		<ul data-role="listview" data-inset="true" id="beerIndex" >
+			</ul>		
+	</div><!-- /content -->
+
+</div><!-- /page -->
+</body>
