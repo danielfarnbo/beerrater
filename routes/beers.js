@@ -16,14 +16,28 @@ db.open(function(err, db) {
                 populateBeerDB();
             }
         });
-        db.collection('ratings', {safe:true}, function(err, collection) {
-            if (err) {
-                console.log("The 'ratings' collection doesn't exist. Creating it with sample data...");
-                populateRatingDB();
-            }
+
+
+        db.collection('ratings', {}, function(err, collection) {
+            collection.ensureIndex({'user': 1, 'beernr': 1}, {unique: true});        
         });
+
+        db.collection('users', {}, function(err, collection) {
+            collection.ensureIndex({'name': 1}, {unique: true});        
+        });
+        
+        // db.collection('ratings', {safe:true}, function(err, collection) {
+        //     if (err) {
+        //         console.log("The 'ratings' collection doesn't exist. Creating it with sample data...");
+        //         populateRatingDB();
+        //     }
+        // });
     }
 });
+
+function isNumber(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 exports.findById = function(req, res) {
     var id = req.params.id;
@@ -68,24 +82,62 @@ exports.findAll = function(req, res) {
 //     });
 // }
 
-exports.updateBeer = function(req, res) {
-    var id = req.params.id;
-    var beer = req.body;
-    delete beer._id;
-    console.log('Updating beer: ' + id);
-    console.log(JSON.stringify(beer));
-    db.collection('beers', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, beer, {safe:true}, function(err, result) {
-            if (err) {
-                console.log('Error updating beer: ' + err);
-                res.send({'error':'An error has occurred'});
-            } else {
-                console.log('' + result + ' document(s) updated');
-                res.send(beer);
-            }
+exports.addUser = function(req, res) {
+    var user = req.body;
+    if (user.name) {
+        user = {"name": user.name};
+        console.log('Adding user: ' + JSON.stringify(user));
+        db.collection('users', function(err, collection) {
+            collection.insert(user, {safe:true}, function(err, result) {
+                if (err) {
+                    res.send({'error':'An error has occurred'});
+                } else {
+                    console.log('Success: ' + JSON.stringify(result[0]));
+                    res.send(result[0]);
+                }
+            });
+        });
+    } else {
+        console.warn('malformed input: ', user);
+    }
+};
+
+exports.findAllUsers = function(req, res) {
+    db.collection('users', function(err, collection) {
+        collection.find().toArray(function(err, items) {
+            res.send(items);
         });
     });
-}
+};
+
+exports.findUserById = function(req, res) {
+    var id = req.params.id;
+    console.log('Retrieving user: ' + id);
+    db.collection('users', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+            res.send(item);
+        });
+    });
+};
+
+// exports.updateBeer = function(req, res) {
+//     var id = req.params.id;
+//     var beer = req.body;
+//     delete beer._id;
+//     console.log('Updating beer: ' + id);
+//     console.log(JSON.stringify(beer));
+//     db.collection('beers', function(err, collection) {
+//         collection.update({'_id':new BSON.ObjectID(id)}, beer, {safe:true}, function(err, result) {
+//             if (err) {
+//                 console.log('Error updating beer: ' + err);
+//                 res.send({'error':'An error has occurred'});
+//             } else {
+//                 console.log('' + result + ' document(s) updated');
+//                 res.send(beer);
+//             }
+//         });
+//     });
+// };
 
 // exports.deleteBeer = function(req, res) {
 //     var id = req.params.id;
@@ -104,18 +156,35 @@ exports.updateBeer = function(req, res) {
 
 exports.addRating = function(req, res) {
     var rating = req.body;
-    console.log('Adding rating: ' + JSON.stringify(rating));
-    db.collection('ratings', function(err, collection) {
-        collection.insert(rating, {safe:true}, function(err, result) {
-            if (err) {
-                res.send({'error':'An error has occurred'});
-            } else {
-                console.log('Success: ' + JSON.stringify(result[0]));
-                res.send(result[0]);
-            }
+    if (rating.user && rating.rating && rating.beernr && isNumber(rating.rating) && isNumber(rating.beernr)) {
+        rating = {
+            'user': rating.user,
+            'rating': Math.round(rating.rating),
+            'beernr': Math.round(rating.beernr)
+            };
+        db.collection('users', function(err, collection) {
+            collection.findOne({'_id':new BSON.ObjectID(rating.user)}, function(err, item) {
+                if(!err && item) {
+                            console.log('Adding rating: ' + JSON.stringify(rating));
+                            db.collection('ratings', function(err, collection) {
+                                collection.insert(rating, {safe:true}, function(err, result) {
+                                    if (err) {
+                                        res.send({'error':'An error has occurred'});
+                                    } else {
+                                        console.log('Success: ' + JSON.stringify(result[0]));
+                                        res.send(result[0]);
+                                    }
+                                });
+                            });
+                } else {
+                    res.send('rating not allowed. err: ' + err + ' user: ' + item);
+                }
+            });
         });
-    });
-}
+    } else {
+        console.warn('malformed input: ', rating);
+    }
+};
 
 exports.findAllRatings = function(req, res) {
     db.collection('ratings', function(err, collection) {
@@ -159,22 +228,22 @@ var populateBeerDB = function() {
 
 };
 
-var populateRatingDB = function() {
+// var populateRatingDB = function() {
 
-    var ratings = [
-    {
-        user: 1234,
-        rating: 4,
-        beernr: 0
-    },
-    {
-        user: 5678,
-        rating: 99,
-        beernr: 1
-    }];
+//     var ratings = [
+//     {
+//         user: 1234,
+//         rating: 4,
+//         beernr: 0
+//     },
+//     {
+//         user: 5678,
+//         rating: 99,
+//         beernr: 1
+//     }];
 
-    db.collection('ratings', function(err, collection) {
-        collection.insert(ratings, {safe:true}, function(err, result) {});
-    });
+//     db.collection('ratings', function(err, collection) {
+//         collection.insert(ratings, {safe:true}, function(err, result) {});
+//     });
 
-};
+// };
