@@ -61,21 +61,6 @@ exports.findAll = function(req, res) {
     });
 };
 
-// exports.addBeer = function(req, res) {
-//     var beer = req.body;
-//     console.log('Adding beer: ' + JSON.stringify(beer));
-//     db.collection('beers', function(err, collection) {
-//         collection.insert(beer, {safe:true}, function(err, result) {
-//             if (err) {
-//                 res.send({'error':'An error has occurred'});
-//             } else {
-//                 console.log('Success: ' + JSON.stringify(result[0]));
-//                 res.send(result[0]);
-//             }
-//         });
-//     });
-// }
-
 exports.addUser = function(req, res) {
     var user = req.body;
     if (user.name) {
@@ -105,53 +90,25 @@ exports.findAllUsers = function(req, res) {
     });
 };
 
-exports.findUserById = function(req, res, next) {
+exports.findUserById = function(req, res) {
     var id = req.params.id;
     console.log('Retrieving user: ' + id);
     db.collection('users', function(err, collection) {
         collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
-            if (next) {
-                next(item);
-            } else {
-                res.send(item);
-            }
+            res.send(item);
         });
     });
 };
 
-// exports.updateBeer = function(req, res) {
-//     var id = req.params.id;
-//     var beer = req.body;
-//     delete beer._id;
-//     console.log('Updating beer: ' + id);
-//     console.log(JSON.stringify(beer));
-//     db.collection('beers', function(err, collection) {
-//         collection.update({'_id':new BSON.ObjectID(id)}, beer, {safe:true}, function(err, result) {
-//             if (err) {
-//                 console.log('Error updating beer: ' + err);
-//                 res.send({'error':'An error has occurred'});
-//             } else {
-//                 console.log('' + result + ' document(s) updated');
-//                 res.send(beer);
-//             }
-//         });
-//     });
-// };
-
-// exports.deleteBeer = function(req, res) {
-//     var id = req.params.id;
-//     console.log('Deleting beer: ' + id);
-//     db.collection('beers', function(err, collection) {
-//         collection.remove({'_id':new BSON.ObjectID(id)}, {safe:true}, function(err, result) {
-//             if (err) {
-//                 res.send({'error':'An error has occurred - ' + err});
-//             } else {
-//                 console.log('' + result + ' document(s) deleted');
-//                 res.send(req.body);
-//             }
-//         });
-//     });
-// }
+exports.isUserLogedIn = function(req, res, next) { //TODO this should be handled by findUserById, but how?
+    var id = req.params.id;
+    console.log('Retrieving user: ' + id);
+    db.collection('users', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
+            next(item);      
+        });
+    });
+};
 
 exports.addRating = function(req, res) {
     var rating = req.body;
@@ -256,23 +213,3 @@ var populateBeerDB = function() {
     });
 
 };
-
-// var populateRatingDB = function() {
-
-//     var ratings = [
-//     {
-//         user: 1234,
-//         rating: 4,
-//         beernr: 0
-//     },
-//     {
-//         user: 5678,
-//         rating: 99,
-//         beernr: 1
-//     }];
-
-//     db.collection('ratings', function(err, collection) {
-//         collection.insert(ratings, {safe:true}, function(err, result) {});
-//     });
-
-// };
