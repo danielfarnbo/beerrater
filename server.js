@@ -27,6 +27,15 @@ var checkLogin = function (req, res, next) {
 	}
 }
 
+//CORS middleware
+var allowCrossDomain = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*'); //OBS OSÄKERT!
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+    next();
+}
+
 
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
@@ -34,6 +43,7 @@ app.configure(function () {
     app.use(express.bodyParser());
     app.use(express.cookieParser());
     app.use(express.session({secret: 'FASTFIVEFOREVER!!!'}));
+    app.use(allowCrossDomain);
     app.use(express.static(path.join(__dirname, 'public')));
 });
 
