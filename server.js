@@ -52,13 +52,13 @@ app.configure(function () {
 app.get('/hello', function(req, res){
   res.send('Hello World');
 });
-app.get('/beers', checkLogin, beer.findAll);
-app.get('/beers/:id', checkLogin, beer.findById);
+app.get('/beers', beer.findAll);
+app.get('/beers/:id', beer.findById);
 app.get('/beers/nr/:beerno', checkLogin, beer.findByBeerNr);
-app.post('/ratings', checkLogin, beer.addRating);
-app.get('/ratings', checkLogin, beer.findAllRatings);
-app.get('/ratings/:beerno/:userid', checkLogin, beer.findRatingByBeerIdAndUserId);
-app.put('/ratings/:id', checkLogin, beer.updateRating);
+app.post('/ratings', beer.addRating);
+app.get('/ratings', beer.findAllRatings);
+app.get('/ratings/:beerno/:userid', beer.findRatingByBeerIdAndUserId);
+app.put('/ratings/:id', beer.updateRating);
 app.post('/users', beer.addUser);
 app.get('/users', beer.findAllUsers);
 app.get('/users/:id', beer.findUserById);

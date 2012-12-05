@@ -187,25 +187,88 @@ var populateBeerDB = function() {
 
     var beers = [
     {
-        name: "Oppigårds Winter Ale",
-        picture: "saint_cosme.jpg",
+        name: "S:t Eriks Julporter",
+        picture: "steriks.jpg",
         abv: 5.9,
-        brewery: "Oppigårds",
+        brewery: "S:t Eriks Bryggeri",
         beernr: 1
     },
     {
-        name: "Jólabjór",
-        abv: 5.9,
-        picture: "saint_cosme.jpg",
-        brewery: "Ölvisholt Brugghús",
+        name: "Flying Dog K-9 Cruiser Winter Ale",
+        abv: 7.4,
+        picture: "flyingdog.jpg",
+        brewery: "Flying Dog Brewery",
         beernr: 2
     },
     {
-        name: "Anchor Christmas Ale",
-        picture: "saint_cosme.jpg",
-        abv: 5.5,
-        brewery: "Anchor Brewing",
+        name: "Oppigårds Winter Ale",
+        picture: "oppigards.jpg",
+        abv: 5.3,
+        brewery: "Oppigårds Bryggeri AB",
         beernr: 3
+    },
+    {
+        name: "Dugges Easy Christmas ",
+        picture: "dugges.jpg",
+        abv: 4.2,
+        brewery: "Dugges Ale- & Porterbryggeri",
+        beernr: 4
+    },
+    {
+        name: "Widmer Brothers Brrr Seasonal Ale",
+        picture: "widmer.jpg",
+        abv: 7.2,
+        brewery: "Widmer Brothers Brewing",
+        beernr: 5
+    },
+    {
+        name: "Mysingen Midvinterbrygd",
+        picture: "mysingen.jpg",
+        abv: 6.0,
+        brewery: "Nynäshamns Ångbryggeri AB",
+        beernr: 6
+    },
+    {
+        name: "Mohawk Whiteout Stout",
+        picture: "mohawk_white.jpg",
+        abv: 9.7,
+        brewery: "Mohawk Brewing",
+        beernr: 7
+    },
+    {
+        name: "Jólabjór",
+        picture: "jolabjor.jpg",
+        abv: 6.5,
+        brewery: "Ölvisholt Brugghús",
+        beernr: 8
+    },
+    {
+        name: "Mohawk Blizzard Imperial Porter",
+        picture: "mohawk_blizz.jpg",
+        abv: 9.7,
+        brewery: "Mohawk Brewing",
+        beernr: 9
+    },
+    {
+        name: "Jacobsen Golden Naked Christmas Ale",
+        picture: "jacobsen.jpg",
+        abv: 7.5,
+        brewery: "Carlsberg Danmark",
+        beernr: 10
+    },
+    {
+        name: "Midtfyns Jule Stout",
+        picture: "midtfyns.jpg",
+        abv: 7.6,
+        brewery: "Midtfyns Bryghus",
+        beernr: 11
+    },
+    {
+        name: "Mikkeller Santa's Little Helper ",
+        picture: "mikkeller.jpg",
+        abv: 9.1,
+        brewery: "Mikkeller",
+        beernr: 12
     }];
 
     db.collection('beers', function(err, collection) {
