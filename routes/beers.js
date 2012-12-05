@@ -208,7 +208,7 @@ var populateBeerDB = function() {
         beernr: 3
     },
     {
-        name: "Dugges Easy Christmas ",
+        name: "Dugges Easy Christmas",
         picture: "dugges.jpg",
         abv: 4.2,
         brewery: "Dugges Ale- & Porterbryggeri",
@@ -264,7 +264,7 @@ var populateBeerDB = function() {
         beernr: 11
     },
     {
-        name: "Mikkeller Santa's Little Helper ",
+        name: "Mikkeller Santa's Little Helper",
         picture: "mikkeller.jpg",
         abv: 9.1,
         brewery: "Mikkeller",

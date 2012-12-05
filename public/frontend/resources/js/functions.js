@@ -5,15 +5,12 @@ $(document).ready( function(){
 
 	window.beerCollection = new BeerCollection();
 	window.beerCollection.on("updateBeer", onUpdate);
-	
-	$.ajax({
-	  url: "http://192.168.1.2:3000/beers/",
-	  context: document.body,
-	  contentType:JSON,
-	}).done(function(beerList) { 
-		beerCollection.populateCollection(beerList);
-		self.applicationStartup();
-	});
+	var jqxhrGetBeers = $.get("http://192.168.1.2:3000/beers/", function(beerList) {
+			beerCollection.populateCollection(beerList);
+			self.applicationStartup();
+		}).error(function() {
+			console.log("error");
+		});
 	
 	self.beerHolder = $("#beer");
 	self.index = $("#index");
