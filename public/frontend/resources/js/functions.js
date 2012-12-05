@@ -4,7 +4,7 @@ storageKey = 'LUDDEDRGD';
 $(document).ready( function(){
 
 	window.beerCollection = new BeerCollection();
-	window.beerCollection.on("update", onUpdate);
+	window.beerCollection.on("updateBeer", onUpdate);
 	
 	$.ajax({
 	  url: "resources/json/ales.json",
@@ -22,16 +22,13 @@ $(document).ready( function(){
 		el:"#beer"
 	});
 	window.beerView.on("nextBeer", nextBeer);
-	window.beerView.on("prevBeer", nextBeer);
+	window.beerView.on("prevBeer", prevBeer);
 	window.beerView.on("back", back);
-	
-	self.beerHolder.hide();
-	
 	
 });
 
 function adaptSize(){
-	if( $(window).width() < 600 ){
+	if( $(window).width() < 450 ){
 		$("#beerIndex").children().css("width", "40%");
 	}
 	else{
@@ -51,10 +48,12 @@ function applicationStartup(){
 		self.adaptSize();
 	});
 	self.adaptSize();
+	self.beerHolder.hide();
 }
 
 function onUpdate(){
 	checkLogin();
+	
 	if( window.beerCollection.getCurrentBeer() === undefined ){
 		self.index.show();
 		self.beerHolder.hide(300);
@@ -119,5 +118,4 @@ function prevBeer(){
 
 function back(){
 	window.beerCollection.setCurrentBeer(undefined);
-	console.log(window.beerCollection.getCurrentBeer());
 }
