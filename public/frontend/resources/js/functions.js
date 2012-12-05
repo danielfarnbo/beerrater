@@ -1,11 +1,12 @@
 var self = this,
-storageKey = 'LUDDEDRGD';
+storageKey = 'LUDDEDRGD',
+apiIp = '10.0.1.2';
 
 $(document).ready( function(){
 
 	window.beerCollection = new BeerCollection();
 	window.beerCollection.on("updateBeer", onUpdate);
-	var jqxhrGetBeers = $.get("http://192.168.1.2:3000/beers/", function(beerList) {
+	var jqxhrGetBeers = $.get("http://" + apiIp +":3000/beers/", function(beerList) {
 			beerCollection.populateCollection(beerList);
 			self.applicationStartup();
 		}).error(function() {
@@ -70,7 +71,7 @@ function doLogin(msg) {
 	} while(inputName.length < 2);
 	console.log('do login');
 	var newUser = {name: inputName},
-	jqxhrPost = $.post("http://192.168.1.2:3000/users/", newUser, function(data) {
+	jqxhrPost = $.post("http://" + apiIp +":3000/users/", newUser, function(data) {
 		if (data.error) {
 			doLogin('Namnet upptaget, välj ett annat. ');
 		} else if (data.name && data._id) {
@@ -90,7 +91,7 @@ function checkLogin() {
 	console.log(user);
 
 	if (user) {
-		var jqxhrGet = $.get("http://192.168.1.2:3000/users/" + user._id, function() {
+		var jqxhrGet = $.get("http://" + apiIp +":3000/users/" + user._id, function() {
 			console.log("success in loading existing user");
 		}).error(function() {
 			console.log("error");

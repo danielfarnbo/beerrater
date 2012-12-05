@@ -19,11 +19,11 @@ db.open(function(err, db) {
 
 
         db.collection('ratings', {}, function(err, collection) {
-            collection.ensureIndex({'user': 1, 'beernr': 1}, {unique: true});        
+            collection.ensureIndex({'user': 1, 'beernr': 1}, {unique: true});
         });
 
         db.collection('users', {}, function(err, collection) {
-            collection.ensureIndex({'name': 1}, {unique: true});    
+            collection.ensureIndex({'name': 1}, {unique: true});
         });
 
     }
