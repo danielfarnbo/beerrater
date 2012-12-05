@@ -1,21 +1,31 @@
 var self = this;
 
-$(document).bind('pageinit', function(){
+$(document).ready( function(){
 
-	if( !window.beerCollection )
-	{
-		window.beerCollection = new BeerCollection();
-		window.beerCollection.on("update", onUpdate);
-		
-		$.ajax({
-		  url: "resources/json/ales.json",
-		  context: document.body,
-		  contentType:JSON,
-		}).done(function(beerList) { 
-			beerCollection.populateCollection(beerList);
-			self.applicationStartup();
-		});
-	}
+	window.beerCollection = new BeerCollection();
+	window.beerCollection.on("update", onUpdate);
+	
+	$.ajax({
+	  url: "resources/json/ales.json",
+	  context: document.body,
+	  contentType:JSON,
+	}).done(function(beerList) { 
+		beerCollection.populateCollection(beerList);
+		self.applicationStartup();
+	});
+	
+	self.beerHolder = $("#beer");
+	self.index = $("#index");
+	
+	window.beerView = new BeerView({
+		el:"#beer"
+	});
+	window.beerView.on("nextBeer", nextBeer);
+	window.beerView.on("prevBeer", nextBeer);
+	window.beerView.on("back", back);
+	
+	self.beerHolder.hide();
+
 });
 
 function applicationStartup(){
@@ -30,11 +40,14 @@ function applicationStartup(){
 function onUpdate(){
 	checkLogin();
 	if( window.beerCollection.getCurrentBeer() === undefined ){
-		$.mobile.changePage("index.html");
-		console.log("UNDEFINED");
+		self.index.show();
+		self.beerHolder.hide(300);
 	}
 	else{
-		$.mobile.changePage("beer.html");
+		window.beerView.render(window.beerCollection.getCurrentBeer());
+		self.beerHolder.show(300, function(){
+			self.index.hide();
+		});
 	}
 }
 
@@ -52,4 +65,22 @@ function checkLogin() {
 	} else {
 		doLogin();
 	}
+}
+
+function nextBeer(){
+	
+	var nextIndex = window.beerCollection.getCurrentBeer().get("index");
+	window.beerCollection.setCurrentBeer(nextIndex + 1);
+	window.beerView.render(window.beerCollection.getCurrentBeer());
+}
+
+function prevBeer(){
+	var nextIndex = window.beerCollection.getCurrentBeer().get("index");
+	window.beerCollection.setCurrentBeer(nextIndex - 1);
+	window.beerView.render(window.beerCollection.getCurrentBeer());
+}
+
+function back(){
+	window.beerCollection.setCurrentBeer(undefined);
+	console.log(window.beerCollection.getCurrentBeer());
 }
