@@ -38,7 +38,9 @@
 		<script type="text/template" id="index_template">
 			<li>
 				<a href="#" beerIndex="<%= index %>">
-					<img src="<%= picture %>" alt="" />
+					<div class="indexcrop">
+						<img class="index-beerimage" src="<%= picture %>" alt="" />
+					</div>
 					<section>
 						<p><%= name %>&nbsp;(<%= abv %>%)</p>
 						<p><%= brewery %></p>
@@ -53,7 +55,9 @@
 			<div id="beerArea">
 				<h1>RATE THIS BEER</h1>
 				<section id="#templateContent">
-					<img src=<%= picture %>>
+					<div class="beercrop">
+						<img class="beerbeerimage" src=<%= picture %>>
+					</div>
 					<p><%= name %>&nbsp;(<%= abv %>%)</p>
 					<p><%= brewery %></p>
 				</section>

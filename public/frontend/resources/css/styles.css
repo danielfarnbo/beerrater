@@ -138,6 +138,21 @@ link:hover   {color:#000; }
 	position:absolute; 
 }
 
+.beercrop{
+	overflow: hidden;
+}
+
+.beerbeerimage{
+	margin-top: -50px;
+}
+
+.indexcrop{
+	overflow: hidden;
+}
+
+.indexbeerimage{
+	margin-top: -50px;
+}
 
 @font-face {
     font-family: 'SFShaiFontaiRegular';
