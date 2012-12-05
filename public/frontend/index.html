@@ -6,19 +6,19 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="Content-Type" content="text/html"; charset="ISO-8859-1">
 		
-		<link rel="stylesheet" href="resources/css/jquery-mobile.css" />
 		<link rel="stylesheet" href="resources/css/reset.css" />
 		<link rel="stylesheet" href="resources/css/styles.css" />
 	</head> 
 	<body> 
-		<div data-role="page" id="page">
+		<div id="index">
 			<h1>G.I.B.B Bonanza Rater</h1>
 
-		<div data-role="content">	
 			<ul data-role="listview" data-inset="true" id="beerIndex" >
 			</ul>		
-		</div><!-- /content -->
 		</div>
+		
+		<div id="beer"></div>
+		
 		<script src="resources/js/jquery-1.8.3.min.js"></script>	
 		<script src="resources/js/underscore-min.js"></script>
 		<script src="resources/js/bootstrap.min.js"></script>
@@ -27,9 +27,9 @@
 		<script src="resources/js/views/indexview.js"></script>
 		<script src="resources/js/views/beerview.js"></script>
 		<script src="resources/js/templates/templates.js"></script>
-		<script src="resources/js/jquery.mobile-1.2.0.js"></script>
 		<script src="resources/js/functions.js"></script>
 		<script src="resources/js/jstorage.js"></script>
+		
 		
 		
 		<script type="text/template" id="index_template">
@@ -46,10 +46,9 @@
 		
 	
 	<script type="text/template" id="presentation_template">
-			<div title="back to all beers" id="back"><a href="#"><i class="icon-layout"></i></a></div>
 			<div title="Previous" id="prevArrow"><a href=""><i class="icon-left-open-big"></i></a></div>
 			<div id="beerArea">
-				<h2>RATE THIS BEER</h2>
+				<h1>RATE THIS BEER</h1>
 				<section id="#templateContent">
 					<img src="<%= picture %>">
 					<p>"<%= name %> (<%= abv %>%")</p>
@@ -61,6 +60,7 @@
 				</div>
 			</div>
 			<div title="Next" id="nextArrow"><a href="#"><i class="icon-right-open-big"></i></a></div>
+			<p title="back to all beers" id="back"><a href="#"><i class="icon-layout"></i></a></p>
 	</script>
 	</body>
 	
