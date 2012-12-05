@@ -32,15 +32,6 @@ h2{
 	box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
 }
 
-div.ui-header{
-	background-image:none;
-	background-color:#FFF;
-	border:none;
-	-moz-box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 			rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
-	-webkit-box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 		rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
-	box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
-}
-
 #beerIndex{
 	list-style-type:none;
 	width:100%;
@@ -140,74 +131,6 @@ link:hover   {color:#000; }
 }
 
 
-@font-face {
-    font-family: 'SFShaiFontaiRegular';
-    src: url('../font/Shaifont/SF_Shai_Fontai-webfont.eot');
-    src: url('../font/Shaifont/SF_Shai_Fontai-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Shaifont/SF_Shai_Fontai-webfont.woff') format('woff'),
-         url('../font/Shaifont/SF_Shai_Fontai-webfont.ttf') format('truetype'),
-         url('../font/Shaifont/SF_Shai_Fontai-webfont.svg#SFShaiFontaiRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'SFShaiFontaiExtendedRegular';
-    src: url('../font/Shaifont/SF_Shai_Fontai_Extended-webfont.eot');
-    src: url('../font/Shaifont/SF_Shai_Fontai_Extended-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Shaifont/SF_Shai_Fontai_Extended-webfont.woff') format('woff'),
-         url('../font/Shaifont/SF_Shai_Fontai_Extended-webfont.ttf') format('truetype'),
-         url('../font/Shaifont/SF_Shai_Fontai_Extended-webfont.svg#SFShaiFontaiExtendedRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'SFShaiFontaiDistressedRegular';
-    src: url('../font/Shaifont/SF_Shai_Fontai_Distressed-webfont.eot');
-    src: url('../font/Shaifont/SF_Shai_Fontai_Distressed-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/Shaifont/SF_Shai_Fontai_Distressed-webfont.woff') format('woff'),
-         url('../font/Shaifont/SF_Shai_Fontai_Distressed-webfont.ttf') format('truetype'),
-         url('../font/Shaifont/SF_Shai_Fontai_Distressed-webfont.svg#SFShaiFontaiDistressedRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-
-@font-face {
-    font-family: 'ImpactLabelRegular';
-    src: url('../font/labelfont/Impact_Label-webfont.eot');
-    src: url('../font/labelfont/Impact_Label-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/labelfont/Impact_Label-webfont.woff') format('woff'),
-         url('../font/labelfont/Impact_Label-webfont.ttf') format('truetype'),
-         url('../font/labelfont/Impact_Label-webfont.svg#ImpactLabelRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-    font-family: 'ImpactLabelReversedRegular';
-    src: url('../font/labelfont/Impact_Label_Reversed-webfont.eot');
-    src: url('../font/labelfont/Impact_Label_Reversed-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/labelfont/Impact_Label_Reversed-webfont.woff') format('woff'),
-         url('../font/labelfont/Impact_Label_Reversed-webfont.ttf') format('truetype'),
-         url('../font/labelfont/Impact_Label_Reversed-webfont.svg#ImpactLabelReversedRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
-@font-face {
-  font-family: 'fontello';
-  src: url("../font/fontello-36a4c8a8/font/fontello.eot");
-  src: url("../font/fontello-36a4c8a8/font/fontello.eot?#iefix") format('embedded-opentype'), url("../font/fontello-36a4c8a8/font/fontello.woff") format('woff'), url("../font/fontello-36a4c8a8/font/fontello.ttf") format('truetype'), url("../font/fontello-36a4c8a8/font/fontello.svg#fontello") format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
 
 [class^="icon-"]:before,
 [class*=" icon-"]:before {
