@@ -134,7 +134,7 @@ link:hover   {color:#000; }
 #beer #back{
 	text-align:left;
 	left:5%;
-	top:20px;
+	top:50px;
 	position:absolute; 
 }
 
@@ -233,6 +233,6 @@ link:hover   {color:#000; }
 .icon-cancel-circled:before { content: '\2716';  } /* '?' */
 .icon-plus-circled:before { content: '\2795'; } /* '?' */
 .icon-info-circled:before { content: '\e705'; } /* '?' */
-.icon-left-open-big:before { content: '\e765'; font-size:400%; position:absolute; left:5%; top:50%; } /* '?' */
-.icon-right-open-big:before { content: '\e766'; font-size:400%; position:absolute; right:5%; top:50%;} /* '?' */
+.icon-left-open-big:before { content: '\e765'; font-size:400%; position:absolute; left:5%; top:250px; } /* '?' */
+.icon-right-open-big:before { content: '\e766'; font-size:400%; position:absolute; right:5%; top:250px;} /* '?' */
 .icon-beer:before { content: '\e808'; } /* '?' */
