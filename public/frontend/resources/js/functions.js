@@ -1,4 +1,5 @@
-var self = this;
+var self = this,
+storageKey = 'LUDDEDRGD';
 
 $(document).ready( function(){
 
@@ -51,17 +52,38 @@ function onUpdate(){
 	}
 }
 
-function doLogin() {
-	cosole.log('do login');
+function doLogin(msg) {
+    var inputName;
+    do {
+        inputName=prompt(msg || 'Vad heter du?');
+	} while(inputName.length < 2);
+	console.log('do login');
+	var newUser = {name: inputName},
+	jqxhrPost = $.post("http://localhost:3000/users/", newUser, function(data) {
+		if (data.error) {
+			doLogin('Namnet upptaget, välj ett annat. ');
+		} else if (data.name && data._id) {
+			$.jStorage.set(storageKey, data);
+		} else {
+			alert('Något gick fel. Laddar om sidan.');
+			location.reload();
+		}
+		console.log(data);
+	})
+	.error(function() { doLogin('Namnet upptaget, välj ett annat. '); });
 }
 
+
 function checkLogin() {
-	var user = {name: 'Daniel6', _id: '50be8435f6a92b5e34000002'};//localStorage.getItem('BONANZAUSER');
+	var user = $.jStorage.get(storageKey);
+	console.log(user);
 
 	if (user) {
-		var jqxhr = $.get("http://localhost:3000/users/" + user._id, function() {
-			console.log("success");
-		}).error(function() { console.log("error"); });
+		var jqxhrGet = $.get("http://localhost:3000/users/" + user._id, function() {
+			console.log("success in loading existing user");
+		}).error(function() {
+			console.log("error");
+		});
 	} else {
 		doLogin();
 	}
