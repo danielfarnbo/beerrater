@@ -39,17 +39,25 @@ function onUpdate(){
 }
 
 function doLogin() {
-	cosole.log('do login');
+	console.log('do login');
 }
 
 function checkLogin() {
-	var user = {name: 'Daniel6', _id: '50be8435f6a92b5e34000002'};//localStorage.getItem('BONANZAUSER');
+	// var user = {name: 'Daniel6', _id: '50be8435f6a92b5e34000002'};//localStorage.getItem('BONANZAUSER');
+	var user = $.jStorage.get('BONANZAUSER');
 
 	if (user) {
-		var jqxhr = $.get("http://localhost:3000/users/" + user._id, function() {
-			console.log("success");
+		var jqxhrGet = $.get("http://localhost:3000/users/" + user._id, function() {
+			console.log("success in loading existing user");
 		}).error(function() { console.log("error"); });
 	} else {
+		var newUser = {name: 'frontenduser'},
+			jqxhrPost = $.post("http://localhost:3000/users/", newUser, function(data) {
+				$.jStorage.set('BONANZAUSER', data)
+				console.log("success");
+			}).error(function() { console.log("error"); });
+
+    // perform other work here ..
 		doLogin();
 	}
 }
