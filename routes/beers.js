@@ -72,7 +72,7 @@ exports.addUser = function(req, res) {
                     res.send({'error':'An error has occurred'});
                 } else {
                     console.log('Success: ' + JSON.stringify(result[0]));
-                    req.session.user_id = result[0]._id;
+                    //req.session.user_id = result[0]._id;
                     res.send(result[0]);
                 }
             });

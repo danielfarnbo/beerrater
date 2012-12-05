@@ -9,7 +9,7 @@
 		
 		<link rel="stylesheet" href="resources/css/reset.css" />
 		<link rel="stylesheet" href="resources/css/styles.css" />
-		<link rel="stylesheet" href="resources/css/fontface.css" />
+		<!-- <link rel="stylesheet" href="resources/css/fontface.css" /> -->
 	</head> 
 	<body> 
 		<div id="index">
@@ -52,7 +52,7 @@
 		
 	
 	<script type="text/template" id="presentation_template">
-			<div title="Previous" id="prevArrow"><a href="#"><i class="icon-left-open-big"></i></a></div>
+			
 			<div id="beerArea">
 				<h1>RATE THIS BEER</h1>
 				<section id="#templateContent">
@@ -62,13 +62,17 @@
 					<p><%= name %>&nbsp;(<%= abv %>%)</p>
 					<p><%= brewery %></p>
 				</section>
-				<div data-role="fieldcontain">
-					<label for="slider">Poäng:</label>
-					<input type="number" name="slider" id="slider" value="0" min="0" max="100"  />
+				<div class="ratingwidget" data-role="fieldcontain">
+				<div title="Previous" id="prevArrow"><a href="#"><i class="icon-left-open-big"></i></a></div>
+					<label for="rating">Score:</label>
+					<select name="rating" id="rating">
+						<% _.each(ratings, function(i) { %>  <option value="<%= i %>"><%= i %></option> <% }); %>
+					</select>
+					<div title="Next" id="nextArrow"><a href="#"><i class="icon-right-open-big"></i></a></div>
 				</div>
 			</div>
-			<div title="Next" id="nextArrow"><a href="#"><i class="icon-right-open-big"></i></a></div>
-			<p title="back to all beers" id="back"><a href="#"><i class="icon-layout"></i></a></p>
+			
+			<p title="back to all beers" id="back"><a href="#"><i class="icon-layout"></i>&lt;&lt;Menu</a></p>
 	</script>
 	</body>
 	

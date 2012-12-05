@@ -41,6 +41,39 @@ div.ui-header{
 	box-shadow: 0px 1px 4px /*{global-box-shadow-size}*/ 				rgba(0,0,0,.3) /*{global-box-shadow-color}*/;
 }
 
+select{
+	background: rgba(0, 0, 0, 0.4);
+	color: white;
+	font-family: 'SFShaiFontaiExtendedRegular';
+	font-size: 3.5em;
+	font-weight: bolder;
+	border: 1px solid #CCC;
+	height: 34px;
+}
+
+.ratingwidget{
+	width: 100%;
+	position: relative;
+	bottom: 215px;
+	background-color: red;
+	opacity: 0.6;
+	padding: 19px;
+	display: inline-block;
+	height: 40px;
+}
+
+#prevArrow{
+	display: inline-block;
+	position: absolute;
+	left: 5%;
+}
+
+#nextArrow{
+	display: inline-block;
+	position: absolute;
+	right: 5%;	
+}
+
 #beerIndex{
 	list-style-type:none;
 	width:100%;
@@ -115,8 +148,10 @@ link:hover   {color:#000; }
 	margin-right:25px;
 	margin-bottom:20px;
 	font-family:'SFShaiFontaiExtendedRegular';
-	font-size:1.1em;
+	font-size:4em;
+	font-weight: bolder;
 	border:0;
+	vertical-align: bottom;
 }
 
 #drinking{
@@ -125,8 +160,8 @@ link:hover   {color:#000; }
 }
 
 #beer{
-	background-image=none;
-	background-color=#FFF;
+	background-image:none;
+	background-color:#FFF;
 }
 
 #beer #back{
@@ -134,6 +169,7 @@ link:hover   {color:#000; }
 	left:5%;
 	top:50px;
 	position:absolute; 
+	font-family: 'SFShaiFontaiExtendedRegular'
 }
 
 .beercrop{
@@ -246,6 +282,6 @@ link:hover   {color:#000; }
 .icon-cancel-circled:before { content: '\2716';  } /* '?' */
 .icon-plus-circled:before { content: '\2795'; } /* '?' */
 .icon-info-circled:before { content: '\e705'; } /* '?' */
-.icon-left-open-big:before { content: '\e765'; font-size:400%; position:absolute; left:5%; top:250px; } /* '?' */
-.icon-right-open-big:before { content: '\e766'; font-size:400%; position:absolute; right:5%; top:250px;} /* '?' */
+.icon-left-open-big:before { content: '\e765'; font-size:400%; position:absolute; left:5%; } /* '?' */
+.icon-right-open-big:before { content: '\e766'; font-size:400%; position:absolute; right:5%; } /* '?' */
 .icon-beer:before { content: '\e808'; } /* '?' */
