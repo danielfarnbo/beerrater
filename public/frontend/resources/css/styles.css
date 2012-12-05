@@ -2,6 +2,7 @@ body{
 	min-width:320px;
 	overflow:hidden;
 	overflow-y:scroll;
+	font-size:62.5%;
 }
 
 h1{
@@ -232,6 +233,6 @@ link:hover   {color:#000; }
 .icon-cancel-circled:before { content: '\2716';  } /* '?' */
 .icon-plus-circled:before { content: '\2795'; } /* '?' */
 .icon-info-circled:before { content: '\e705'; } /* '?' */
-.icon-left-open-big:before { content: '\e765'; font-size:400%; position:fixed; left:5%; top:50%; } /* '?' */
-.icon-right-open-big:before { content: '\e766'; font-size:400%; position:fixed; right:5%; top:50%;} /* '?' */
+.icon-left-open-big:before { content: '\e765'; font-size:400%; position:absolute; left:5%; top:50%; } /* '?' */
+.icon-right-open-big:before { content: '\e766'; font-size:400%; position:absolute; right:5%; top:50%;} /* '?' */
 .icon-beer:before { content: '\e808'; } /* '?' */
