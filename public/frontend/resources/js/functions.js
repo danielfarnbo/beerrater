@@ -26,8 +26,19 @@ $(document).ready( function(){
 	window.beerView.on("back", back);
 	
 	self.beerHolder.hide();
-
+	
+	
 });
+
+function adaptSize(){
+	if( $(window).width() < 600 ){
+		$("#beerIndex").children().css("width", "40%");
+	}
+	else{
+		$("#beerIndex").children().css("width", "25%");
+	}
+}
+
 
 function applicationStartup(){
 	checkLogin();
@@ -36,6 +47,10 @@ function applicationStartup(){
 	});
 	window.indexView.render(window.beerCollection);
 	
+	$(window).resize(function(){
+		self.adaptSize();
+	});
+	self.adaptSize();
 }
 
 function onUpdate(){
