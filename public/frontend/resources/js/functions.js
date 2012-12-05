@@ -7,7 +7,7 @@ $(document).ready( function(){
 	window.beerCollection.on("updateBeer", onUpdate);
 	
 	$.ajax({
-	  url: "resources/json/ales.json",
+	  url: "http://192.168.1.2:3000/beers/",
 	  context: document.body,
 	  contentType:JSON,
 	}).done(function(beerList) { 
