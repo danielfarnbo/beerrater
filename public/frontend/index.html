@@ -64,8 +64,8 @@
 				</section>
 				<div class="ratingwidget" data-role="fieldcontain">
 				<div title="Previous" id="prevArrow"><a href="#"><i class="icon-left-open-big"></i></a></div>
-					<label for="rating">Score:</label>
-					<select name="rating" id="rating">
+					<label for="rating-<%= beernr %>">Score:</label>
+					<select name="rating-<%= beernr %>" id="rating-<%= beernr %>">
 						<% _.each(ratings, function(i) { %>  <option value="<%= i %>"><%= i %></option> <% }); %>
 					</select>
 					<div title="Next" id="nextArrow"><a href="#"><i class="icon-right-open-big"></i></a></div>

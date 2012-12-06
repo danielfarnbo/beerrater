@@ -1,6 +1,7 @@
 var self = this,
 storageKey = 'LUDDEDRGD',
-apiIp = '10.0.1.2';
+apiIp = '10.0.1.2',
+userObject;
 
 $(document).ready( function(){
 
@@ -76,6 +77,7 @@ function doLogin(msg) {
 			doLogin('Namnet upptaget, välj ett annat. ');
 		} else if (data.name && data._id) {
 			$.jStorage.set(storageKey, data);
+			userObject = data;
 		} else {
 			alert('Något gick fel. Laddar om sidan.');
 			location.reload();
