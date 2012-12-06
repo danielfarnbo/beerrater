@@ -78,6 +78,7 @@ function doLogin(msg) {
 		} else if (data.name && data._id) {
 			$.jStorage.set(storageKey, data);
 			userObject = data;
+			return userObject;
 		} else {
 			alert('Något gick fel. Laddar om sidan.');
 			location.reload();
@@ -90,16 +91,32 @@ function doLogin(msg) {
 
 function checkLogin() {
 	var user = $.jStorage.get(storageKey);
-	console.log(user);
+	//console.log(user);
 
 	if (user) {
-		var jqxhrGet = $.get("http://" + apiIp +":3000/users/" + user._id, function() {
-			console.log("success in loading existing user");
+		var jqxhrGet = $.get("http://" + apiIp +":3000/users/" + user._id, function(data) {
+			if(data && data.name && data._id) {
+				userObject = data;
+			} else {
+				doLogin();		
+			}	
+			//console.log("success in loading existing user");
 		}).error(function() {
 			console.log("error");
 		});
 	} else {
 		doLogin();
+	}
+}
+
+function getUser() {
+	if (userObject) {
+		return userObject;
+	} else if ($.jStorage.get(storageKey)) {
+		userObject = $.jStorage.get(storageKey);
+		return userObject;
+	} else {
+		return doLogin(); 
 	}
 }
 

@@ -120,7 +120,7 @@ exports.addRating = function(req, res) {
             };
         db.collection('users', function(err, collection) {
             collection.findOne({'_id':new BSON.ObjectID(rating.user)}, function(err, item) {
-                if(!err && item) {
+                if(!err && item && item.name) {
                             console.log('Adding rating: ' + JSON.stringify(rating));
                             db.collection('ratings', function(err, collection) {
                                 collection.insert(rating, {safe:true}, function(err, result) {
@@ -167,14 +167,22 @@ exports.updateRating = function(req, res) {
     delete rating._id;
     console.log('Updating rating: ' + id);
     console.log(JSON.stringify(rating));
-    db.collection('ratings', function(err, collection) {
-        collection.update({'_id':new BSON.ObjectID(id)}, rating, {safe:true}, function(err, result) {
-            if (err) {
-                console.log('Error updating rating: ' + err);
-                res.send({'error':'An error has occurred'});
+    db.collection('users', function(err, collection) {
+        collection.findOne({'_id':new BSON.ObjectID(rating.user)}, function(err, item) {
+            if(!err && item && item.name) {
+                db.collection('ratings', function(err, collection) {
+                    collection.update({'_id':new BSON.ObjectID(id)}, rating, {safe:true}, function(err, result) {
+                        if (err) {
+                            console.log('Error updating rating: ' + err);
+                            res.send({'error':'An error has occurred'});
+                        } else {
+                            console.log('' + result + ' rating updated');
+                            res.send(rating);
+                        }
+                    });
+                });
             } else {
-                console.log('' + result + ' rating updated');
-                res.send(rating);
+                res.send('Rating not allowed. err: ' + err + ' user: ' + item);
             }
         });
     });
