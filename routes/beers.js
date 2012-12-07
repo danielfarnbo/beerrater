@@ -167,13 +167,11 @@ exports.totalRatings = function(req, res) {
             //}
         //}
     ], function (err, results) {
-        console.log(results);
         db.collection('beers', function(err, collection) {
             collection.find().toArray(function(err, beers) {
                 for (var i = results.length; i > 0; i--) {
                     for (var j = beers.length; j > 0; j--) {
                         if(results[i-1]._id === beers[j-1].beernr) {
-                            console.log(results[i-1]._id, beers[j-1].beernr);
                             results[i-1].beername = beers[j-1].name;
                         }
                     }
