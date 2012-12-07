@@ -39,7 +39,8 @@ function adaptSize(){
 function applicationStartup(){
 	checkLogin();
 	window.indexView = new IndexView({
-		el:"#beerIndex"
+		el:"#beerIndex",
+		model: window.beerCollection
 	});
 	window.indexView.render(window.beerCollection);
 	

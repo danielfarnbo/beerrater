@@ -51,6 +51,10 @@ select{
 	height: 34px;
 }
 
+.rated{
+	opacity: .5;
+}
+
 .ratingwidget{
 	width: 100%;
 	position: relative;

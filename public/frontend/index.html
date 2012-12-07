@@ -37,14 +37,14 @@
 		
 		
 		<script type="text/template" id="index_template">
-			<li>
+			<li class="<%- ratingcls %>">
 				<a href="#" beerIndex="<%= index %>">
 					<div class="indexcrop">
 						<img class="indexbeerimage" src="<%= picture %>" alt="" />
 					</div>
 					<section>
-						<p><%= name %>&nbsp;(<%= abv %>%)</p>
-						<p><%= brewery %></p>
+						<p><%- name %>&nbsp;(<%- abv %>%)</p>
+						<p><%- brewery %></p>
 					</section>
 				</a>
 			</li>
@@ -57,16 +57,16 @@
 				<h1>RATE THIS BEER</h1>
 				<section id="#templateContent">
 					<div class="beercrop">
-						<img class="beerbeerimage" src=<%= picture %>>
+						<img class="beerbeerimage" src=<%- picture %>>
 					</div>
-					<p><%= name %>&nbsp;(<%= abv %>%)</p>
-					<p><%= brewery %></p>
+					<p><%- name %>&nbsp;(<%- abv %>%)</p>
+					<p><%- brewery %></p>
 				</section>
 				<div class="ratingwidget" data-role="fieldcontain">
 				<div title="Previous" id="prevArrow"><a href="#"><i class="icon-left-open-big"></i></a></div>
 					<label for="rating-<%= beernr %>">Score:</label>
 					<select name="rating-<%= beernr %>" class="rating" id="rating-<%= beernr %>">
-						<% _.each(ratings, function(i) { %>  <option value="<%= i %>"><%= i %></option> <% }); %>
+						<% _.each(ratings, function(i) { %>  <option value="<%- i %>"><%- i %></option> <% }); %>
 					</select>
 					<div title="Next" id="nextArrow"><a href="#"><i class="icon-right-open-big"></i></a></div>
 				</div>
