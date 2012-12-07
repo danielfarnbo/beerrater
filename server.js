@@ -64,6 +64,7 @@ app.get('/beers/:id', beer.findById);
 app.get('/beers/nr/:beerno', beer.findByBeerNr);
 app.post('/ratings', beer.addRating);
 app.get('/ratings', beer.findAllRatings);
+app.get('/ratings/total', beer.totalRatings);
 app.get('/ratings/:beerno/:userid', beer.findRatingByBeerIdAndUserId);
 app.put('/ratings/:id', beer.updateRating);
 app.post('/users', beer.addUser);

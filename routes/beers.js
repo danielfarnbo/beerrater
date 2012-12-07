@@ -44,7 +44,7 @@ exports.findById = function(req, res) {
 };
 
 exports.findByBeerNr = function(req, res) {
-    var beerno = parseInt(req.params.beerno, 10);
+    var beerno = req.params.beerno;
     console.log('Retrieving beer: ' + beerno);
     db.collection('beers', function(err, collection) {
         collection.findOne({'beernr': beerno}, function(err, item) {
@@ -105,18 +105,18 @@ exports.isUserLogedIn = function(req, res, next) { //TODO this should be handled
     console.log('Retrieving user: ' + id);
     db.collection('users', function(err, collection) {
         collection.findOne({'_id':new BSON.ObjectID(id)}, function(err, item) {
-            next(item);      
+            next(item);
         });
     });
 };
 
 exports.addRating = function(req, res) {
     var rating = req.body;
-    if (rating.user && rating.rating && rating.beernr && isNumber(rating.rating) && isNumber(rating.beernr)) {
+    if (rating.user && rating.rating && rating.beernr && isNumber(rating.rating)) {
         rating = {
             'user': rating.user,
-            'rating': Math.round(rating.rating),
-            'beernr': Math.round(rating.beernr)
+            'rating': parseInt(rating.rating, 10),
+            'beernr': rating.beernr
             };
         db.collection('users', function(err, collection) {
             collection.findOne({'_id':new BSON.ObjectID(rating.user)}, function(err, item) {
@@ -150,8 +150,43 @@ exports.findAllRatings = function(req, res) {
     });
 };
 
+exports.totalRatings = function(req, res) {
+    var collection = db.collection('ratings');
+    collection.aggregate([
+        {
+            $group: {
+                _id: '$beernr',
+                votes : { $sum : 1 },
+                points: {$sum: '$rating'}
+            }
+        }//,
+        //{
+            // sort by the new points field
+            //$sort: {
+                //"points" : -1
+            //}
+        //}
+    ], function (err, results) {
+        console.log(results);
+        db.collection('beers', function(err, collection) {
+            collection.find().toArray(function(err, beers) {
+                for (var i = results.length; i > 0; i--) {
+                    for (var j = beers.length; j > 0; j--) {
+                        if(results[i-1]._id === beers[j-1].beernr) {
+                            console.log(results[i-1]._id, beers[j-1].beernr);
+                            results[i-1].beername = beers[j-1].name;
+                        }
+                    }
+                    results[i-1].calculated = Math.round(results[i-1].points / results[i-1].votes);
+                }
+                res.send(results);
+            });
+        });
+    });
+};
+
 exports.findRatingByBeerIdAndUserId = function(req, res) {
-    var beerno = parseInt(req.params.beerno, 10),
+    var beerno = req.params.beerno,
         userid = req.params.userid;
     console.log('Retrieving rating: ', beerno, userid);
     db.collection('ratings', function(err, collection) {
@@ -164,6 +199,7 @@ exports.findRatingByBeerIdAndUserId = function(req, res) {
 exports.updateRating = function(req, res) {
     var id = req.params.id;
     var rating = req.body;
+    rating.rating = parseInt(rating.rating, 10);
     delete rating._id;
     console.log('Updating rating: ' + id);
     console.log(JSON.stringify(rating));
@@ -197,86 +233,86 @@ var populateBeerDB = function() {
     {
         name: "S:t Eriks Julporter",
         picture: "steriks.jpg",
-        abv: 5.9,
+        abv: "5.9",
         brewery: "S:t Eriks Bryggeri",
-        beernr: 1
+        beernr: "1"
     },
     {
         name: "Flying Dog K-9 Cruiser Winter Ale",
-        abv: 7.4,
+        abv: "7.4",
         picture: "flyingdog.jpg",
         brewery: "Flying Dog Brewery",
-        beernr: 2
+        beernr: "2"
     },
     {
         name: "Oppigårds Winter Ale",
         picture: "oppigards.jpg",
-        abv: 5.3,
+        abv: "5.3",
         brewery: "Oppigårds Bryggeri AB",
-        beernr: 3
+        beernr: "3"
     },
     {
         name: "Dugges Easy Christmas",
         picture: "dugges.jpg",
-        abv: 4.2,
+        abv: "4.2",
         brewery: "Dugges Ale- & Porterbryggeri",
-        beernr: 4
+        beernr: "4"
     },
     {
         name: "Widmer Brothers Brrr Seasonal Ale",
         picture: "widmer.jpg",
-        abv: 7.2,
+        abv: "7.2",
         brewery: "Widmer Brothers Brewing",
-        beernr: 5
+        beernr: "5"
     },
     {
         name: "Mysingen Midvinterbrygd",
         picture: "mysingen.jpg",
-        abv: 6.0,
+        abv: "6.0",
         brewery: "Nynäshamns Ångbryggeri AB",
-        beernr: 6
+        beernr: "6"
     },
     {
         name: "Mohawk Whiteout Stout",
         picture: "mohawk_white.jpg",
-        abv: 9.7,
+        abv: "9.7",
         brewery: "Mohawk Brewing",
-        beernr: 7
+        beernr: "7"
     },
     {
         name: "Jólabjór",
         picture: "jolabjor.jpg",
-        abv: 6.5,
+        abv: "6.5",
         brewery: "Ölvisholt Brugghús",
-        beernr: 8
+        beernr: "8"
     },
     {
         name: "Mohawk Blizzard Imperial Porter",
         picture: "mohawk_blizz.jpg",
-        abv: 9.7,
+        abv: "9.7",
         brewery: "Mohawk Brewing",
-        beernr: 9
+        beernr: "9"
     },
     {
         name: "Jacobsen Golden Naked Christmas Ale",
         picture: "jacobsen.jpg",
-        abv: 7.5,
+        abv: "7.5",
         brewery: "Carlsberg Danmark",
-        beernr: 10
+        beernr: "10"
     },
     {
         name: "Midtfyns Jule Stout",
         picture: "midtfyns.jpg",
-        abv: 7.6,
+        abv: "7.6",
         brewery: "Midtfyns Bryghus",
-        beernr: 11
+        beernr: "11"
     },
     {
         name: "Mikkeller Santa's Little Helper",
         picture: "mikkeller.jpg",
-        abv: 9.1,
+        abv: "9.1",
         brewery: "Mikkeller",
-        beernr: 12
+        beernr: "12"
     }];
 
     db.collection('beers', function(err, collection) {

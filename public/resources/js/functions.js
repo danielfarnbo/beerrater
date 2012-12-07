@@ -99,8 +99,8 @@ function checkLogin() {
 			if(data && data.name && data._id) {
 				userObject = data;
 			} else {
-				doLogin();		
-			}	
+				doLogin();
+			}
 			//console.log("success in loading existing user");
 		}).error(function() {
 			console.log("error");
@@ -117,7 +117,7 @@ function getUser() {
 		userObject = $.jStorage.get(storageKey);
 		return userObject;
 	} else {
-		return doLogin(); 
+		return doLogin();
 	}
 }
 
