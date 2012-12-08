@@ -77,8 +77,10 @@ function doLogin(msg) {
 		if (data.error) {
 			doLogin('Namnet upptaget, välj ett annat. ');
 		} else if (data.name && data._id) {
+			if($.jStorage.get(storageKey)) { $.jStorage.deleteKey(storageKey); }
 			$.jStorage.set(storageKey, data);
 			userObject = data;
+
 			return userObject;
 		} else {
 			alert('Något gick fel. Laddar om sidan.');

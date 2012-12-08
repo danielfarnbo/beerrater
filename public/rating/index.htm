@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Highcharts Example</title>
+
+		<script type="text/javascript" src="jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+$(function () {
+    var chart,
+    categories = [];
+    $(document).ready(function() {
+        //http://localhost:3000/ratings/total
+        function requestData() {
+            var blength,
+                ratings = [],
+                jqxhrGet = $.get("http://10.0.1.2:3000/ratings/total", function(beerdata) {
+                    if(beerdata) {
+                        blength = beerdata.length,
+                        clength = categories.length;
+                        for (var i = 0; i < clength; i++) {
+                            ratings[i]=0;
+                        }
+                        for (var i = 0; i < clength; i++) {
+                            for (var j = 0; j < blength; j++) {
+                                if (categories[i] === beerdata[j]._id) {
+                                    ratings[i] = beerdata[j].calculated;
+                                }
+                            }
+                        }
+                        if(chart.series[0].data.length == 0){
+                            chart.series[0].setData(ratings);
+                        } else {
+                            var rlength = ratings.length;
+                            for(var k = 0; k < rlength; k++) {
+                                var col = '#FF00FF';
+                                if (parseInt(ratings[k]) <= 20) {
+                                    col = '#ECECEC';
+                                } else if (parseInt(ratings[k]) <= 40) {
+                                    col = '#EECECE';
+                                } else if (parseInt(ratings[k]) <= 60) {
+                                    col = '#F39393';
+                                } else if (parseInt(ratings[k]) <= 80) {
+                                    col = '#F75858';
+                                } else if (parseInt(ratings[k]) <= 90) {
+                                    col = '#FA3B3B';
+                                } else {
+                                    col = '#FF0000';
+                                }
+                                chart.series[0].data[k].update(
+                                    {color: col,y: ratings[k]}
+                                );    
+                            }
+
+                        }
+                        
+
+                    }
+                }).error(function() {
+                    console.log("error");
+                });
+        }
+
+
+        var jqxhrGetBeer = $.get("http://10.0.1.2:3000/beers", function(data) {
+            if(data) {
+                var blength = data.length;
+                for (var i = 0; i < blength; i++) {
+                    categories[i] = data[i].beernr;
+                }
+                initChart();
+            }
+        }).error(function() {
+            console.log("error");
+        });
+
+
+        function initChart () {
+
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'container',
+                    type: 'bar',
+                    animation: {
+                        duration: 3000,
+                        easing: 'swing'
+                    },
+                    events: {
+                        load: requestData
+                    }
+                },
+                title: {
+                    text: 'G.I.B.B Statistics Inc.'
+                },
+                subtitle: {
+                    text: 'Julölsbonanza 2012'
+                },
+                xAxis: {
+                    categories: categories,
+                    title: {
+                        text: 'Beers'
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Points',
+                        align: 'high'
+                    },
+                    labels: {
+                        overflow: 'justify'
+                    }
+                },
+                tooltip: {
+                    formatter: function() {
+                        return ''+
+                            this.series.name +': '+ this.y +' points';
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            enabled: true
+                        }
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'top',
+                    x: -100,
+                    y: 100,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: '#FFFFFF',
+                    shadow: true
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'G.I.B.B. Bonanza Beer Ratings',
+                    data: []
+                }]
+            });
+        }
+         setInterval(function() { requestData(); }, 5000);
+
+    });
+    
+});
+		</script>
+	</head>
+	<body>
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+	</body>
+</html>
