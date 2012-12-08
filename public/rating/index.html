@@ -8,7 +8,8 @@
 		<script type="text/javascript">
 $(function () {
     var chart,
-    categories = [];
+    categories = [],
+    secretnames = [];
     $(document).ready(function() {
         //http://localhost:3000/ratings/total
         function requestData() {
@@ -28,14 +29,12 @@ $(function () {
                                 }
                             }
                         }
-                        console.log(chart.series[0].data);
                         if(chart.series[0].data.length == 0){
                             chart.series[0].setData(ratings);
                         } else {
                             var rlength = ratings.length;
                             for(var k = 0; k < rlength; k++) {
                                 var col = '#FF00FF';
-                                console.log(ratings[k]);
                                 if (parseInt(ratings[k]) <= 20) {
                                     col = '#ECECEC';
                                 } else if (parseInt(ratings[k]) <= 40) {
@@ -63,10 +62,23 @@ $(function () {
                 });
         }
 
+        function fisherYates ( myArray ) {
+            var i = myArray.length;
+            if ( i == 0 ) return false;
+                while ( --i ) {
+                    var j = Math.floor( Math.random() * ( i + 1 ) );
+                    var tempi = myArray[i];
+                    var tempj = myArray[j];
+                    myArray[i] = tempj;
+                    myArray[j] = tempi;
+            }
+        }
+
 
         var jqxhrGetBeer = $.get("http://10.0.1.2:3000/beers", function(data) {
             if(data) {
                 var blength = data.length;
+                fisherYates(data);
                 for (var i = 0; i < blength; i++) {
                     categories[i] = data[i].beernr;
                 }
@@ -98,7 +110,7 @@ $(function () {
                     text: 'Julölsbonanza 2012'
                 },
                 xAxis: {
-                    categories: categories,
+                    categories: [],
                     title: {
                         text: 'Beers'
                     }
