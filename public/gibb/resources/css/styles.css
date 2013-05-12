@@ -183,6 +183,19 @@ a:hover   { color:#000; }
 	margin-top: -40px;
 }
 
+/* HACK, REMOVE WHEN CHANGING BEERS */
+.beerbeerimg-4{
+	margin-top: -18px;
+}
+.beerbeerimg-5{
+	margin-top: -10px;
+}
+.beerbeerimg-8{
+	margin-top: -29px;
+}
+.beerbeerimg-9{
+	margin-top: -33px;
+}
 .indexcrop{
 	overflow: hidden;
 }
