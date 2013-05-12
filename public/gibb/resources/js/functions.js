@@ -1,6 +1,6 @@
 var self = this,
 storageKey = 'LUDDEDRGD',
-apiIp = '10.0.1.2',
+apiIp = 'localhost',
 userObject;
 
 $(document).ready( function(){

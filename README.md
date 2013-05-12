@@ -43,13 +43,15 @@ GET '/users', get all users
 
 GET '/users/:id', get user by id (maybe not necessary?)
 
+GET /ratings/total, get calculated total ratings per beer
+
+GET /ratings/diff, get calculated diff score between users scores and total score
+
 
 TODO
 ----
 
 PUT /users, update user
-
-GET /ratings/total, get calculated total ratings per beer
 
 GET /users/winner, get the user who's ratings are closest to the calculated total
 

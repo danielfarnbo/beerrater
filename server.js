@@ -46,8 +46,10 @@ var allowCrossDomain = function(req, res, next) {
 
 app.configure(function () {
     app.set('port', process.env.PORT || 3000);
+    app.use(express.compress()); //@todo: varför funkar inte detta?
     app.use(express.logger('dev'));  /* 'default', 'short', 'tiny', 'dev' */
     app.use(express.bodyParser());
+    app.use(express.favicon("favicon.ico"));
     // app.use(express.cookieParser());
     // app.use(express.session({secret: 'FASTFIVEFOREVER!!!'}));
     app.use(allowCrossDomain);
@@ -65,6 +67,7 @@ app.get('/beers/nr/:beerno', beer.findByBeerNr);
 app.post('/ratings', beer.addRating);
 app.get('/ratings', beer.findAllRatings);
 app.get('/ratings/total', beer.totalRatings);
+app.get('/ratings/diff', beer.userRatingsDiff);
 app.get('/ratings/:beerno/:userid', beer.findRatingByBeerIdAndUserId);
 app.put('/ratings/:id', beer.updateRating);
 app.post('/users', beer.addUser);

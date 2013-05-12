@@ -92,13 +92,12 @@ select{
 	vertical-align:top;
 }
 
-
 #beerIndex li img{
 	margin-top:10px; 
 	margin-left:25%;
 	margin-right:25%;
-	width:50%;
 	height:auto;
+	width: 50%;
 }
 
 #beerIndex li p{
@@ -109,7 +108,6 @@ select{
 	text-align:center;
 	margin-top:0;
 	margin-bottom:5px;
-	color:#000;
 }
 
 .beer{
@@ -191,6 +189,43 @@ a:hover   { color:#000; }
 
 .indexbeerimage{
 	margin-top: -10px !important;
+}
+
+.beercopy-1{
+	color: #67bd4b;
+}
+.beercopy-2{
+	color: #6b83c1;
+}
+.beercopy-3{
+	color: #924e9f;
+}
+.beercopy-4{
+	color: #ba7a73;
+}
+.beercopy-5{
+	color: #68b1ad;
+}
+.beercopy-6{
+	color: #6cc17d;
+}
+.beercopy-7{
+	color: #b13f41;
+}
+.beercopy-8{
+	color: #67bd4b;
+}
+.beercopy-9{
+	color: #4a4da1;
+}
+.beercopy-10{
+	color: #6fb4b6;
+}
+.beercopy-11{
+	color: #eeab5f;
+}
+.beercopy-12{
+	color: #55ade1;
 }
 
 @font-face {

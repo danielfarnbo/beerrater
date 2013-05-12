@@ -2,21 +2,21 @@ var mongo = require('mongodb');
 
 var Server = mongo.Server,
     Db = mongo.Db,
-    BSON = mongo.BSONPure;
+    BSON = mongo.BSONPure,
+    database = 'beerdb_dev';
 
 var server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db('beerdb', server, {safe: true});
+db = new Db(database, server, {safe: true});
 
 db.open(function(err, db) {
     if(!err) {
-        console.log("Connected to 'beerdb' database");
+        console.log("Connected to " + database + " database");
         db.collection('beers', {safe:true}, function(err, collection) {
             if (err) {
                 console.log("The 'beers' collection doesn't exist. Creating it with sample data...");
                 populateBeerDB();
             }
         });
-
 
         db.collection('ratings', {}, function(err, collection) {
             collection.ensureIndex({'user': 1, 'beernr': 1}, {unique: true});
@@ -183,6 +183,60 @@ exports.totalRatings = function(req, res) {
     });
 };
 
+exports.userRatingsDiff = function(req, res) {
+    var collection = db.collection('ratings'),
+    aggregatedRatings,
+    allRatings,
+    finalResult = [];
+    collection.aggregate([
+        {
+            $group: {
+                _id: '$beernr',
+                votes : { $sum : 1 },
+                points: {$sum: '$rating'}
+            }
+        }
+    ], function (err, results) {
+        db.collection('beers', function(err, collection) {
+            collection.find().toArray(function(err, beers) {
+                for (var i = results.length; i > 0; i--) {
+                    for (var j = beers.length; j > 0; j--) {
+                        if(results[i-1]._id === beers[j-1].beernr) {
+                            results[i-1].beername = beers[j-1].name;
+                        }
+                    }
+                    results[i-1].calculated = Math.round(results[i-1].points / results[i-1].votes);
+                }
+                aggregatedRatings = results;
+                db.collection('ratings', function(err, collection) {
+                    collection.find().toArray(function(err, items) {
+                        allRatings = items;
+                        db.collection('users', function(err, collection) {
+                            collection.find().toArray(function(err, users) {
+                                for (var i = users.length; i > 0; i--) {
+                                    userDiff = {
+                                        'user': users[i-1],
+                                        'uSuckValue': 0
+                                    };
+                                    for (var j = allRatings.length; j > 0; j--) {
+                                        for (var k = aggregatedRatings.length; k > 0; k--) {
+                                            if (aggregatedRatings[k-1]._id === allRatings[j-1].beernr && allRatings[j-1].user === users[i-1]._id+''){
+                                                userDiff.uSuckValue += Math.abs(aggregatedRatings[k-1].calculated - allRatings[j-1].rating);
+                                            }
+                                        }
+                                    }
+                                    finalResult.push(userDiff);
+                                }
+                                res.send(finalResult);
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
+};
+
 exports.findRatingByBeerIdAndUserId = function(req, res) {
     var beerno = req.params.beerno,
         userid = req.params.userid;
@@ -229,38 +283,38 @@ var populateBeerDB = function() {
 
     var beers = [
     {
-        name: "S:t Eriks Julporter",
-        picture: "steriks.jpg",
-        abv: "5.9",
-        brewery: "S:t Eriks Bryggeri",
+        name: "Utopias",
+        picture: "utopias.png",
+        abv: "27",
+        brewery: "Samuel Adams",
         beernr: "1"
     },
     {
-        name: "Flying Dog K-9 Cruiser Winter Ale",
-        abv: "7.4",
-        picture: "flyingdog.jpg",
-        brewery: "Flying Dog Brewery",
+        name: "Envy",
+        abv: "6.5",
+        picture: "amager.png",
+        brewery: "Amager Brygghus",
         beernr: "2"
     },
     {
-        name: "Oppigårds Winter Ale",
-        picture: "oppigards.jpg",
-        abv: "5.3",
-        brewery: "Oppigårds Bryggeri AB",
+        name: "Tjockhult Tjinook",
+        picture: "tjockhult.png",
+        abv: "5.1",
+        brewery: "Nynäshamns Ångbryggeri",
         beernr: "3"
     },
     {
-        name: "Dugges Easy Christmas",
-        picture: "dugges.jpg",
-        abv: "4.2",
-        brewery: "Dugges Ale- & Porterbryggeri",
+        name: "Saison de Dottignies",
+        picture: "dottignies.png",
+        abv: "6.0",
+        brewery: "?",
         beernr: "4"
     },
     {
-        name: "Widmer Brothers Brrr Seasonal Ale",
-        picture: "widmer.jpg",
-        abv: "7.2",
-        brewery: "Widmer Brothers Brewing",
+        name: "Hell",
+        picture: "hell.png",
+        abv: "5.1",
+        brewery: "Jämtlands Bryggeri",
         beernr: "5"
     },
     {
@@ -271,45 +325,45 @@ var populateBeerDB = function() {
         beernr: "6"
     },
     {
-        name: "Mohawk Whiteout Stout",
-        picture: "mohawk_white.jpg",
-        abv: "9.7",
-        brewery: "Mohawk Brewing",
+        name: "K:rlek vår/sommar 2013",
+        picture: "krlek13.png",
+        abv: "5.5",
+        brewery: "Mikkeller",
         beernr: "7"
     },
     {
-        name: "Jólabjór",
-        picture: "jolabjor.jpg",
-        abv: "6.5",
-        brewery: "Ölvisholt Brugghús",
+        name: "Sans Frontier",
+        picture: "frontier.png",
+        abv: "7.0",
+        brewery: "To Øl",
         beernr: "8"
     },
     {
-        name: "Mohawk Blizzard Imperial Porter",
-        picture: "mohawk_blizz.jpg",
-        abv: "9.7",
-        brewery: "Mohawk Brewing",
+        name: "Spontan Cherry Fredriksdal",
+        picture: "spontan.png",
+        abv: "6.2",
+        brewery: "Mikkeller",
         beernr: "9"
     },
     {
-        name: "Jacobsen Golden Naked Christmas Ale",
-        picture: "jacobsen.jpg",
-        abv: "7.5",
-        brewery: "Carlsberg Danmark",
+        name: "Valeir Blonde",
+        picture: "valeir.png",
+        abv: "6.5",
+        brewery: "?",
         beernr: "10"
     },
     {
-        name: "Midtfyns Jule Stout",
-        picture: "midtfyns.jpg",
-        abv: "7.6",
-        brewery: "Midtfyns Bryghus",
+        name: "Tindved",
+        picture: "tindved.png",
+        abv: "7.0",
+        brewery: "Nøgne Ø",
         beernr: "11"
     },
     {
-        name: "Mikkeller Santa's Little Helper",
-        picture: "mikkeller.jpg",
-        abv: "9.1",
-        brewery: "Mikkeller",
+        name: "Bedarö Bitter",
+        picture: "bedaro.png",
+        abv: "4.5",
+        brewery: "Nynäshamns Ångbryggeri",
         beernr: "12"
     }];
 
