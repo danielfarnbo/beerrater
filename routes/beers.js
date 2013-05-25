@@ -3,7 +3,7 @@ var mongo = require('mongodb');
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure,
-    database = 'beerdb_dev';
+    database = 'beerdb_sb13';
 
 var server = new Server('localhost', 27017, {auto_reconnect: true});
 db = new Db(database, server, {safe: true});
@@ -307,7 +307,7 @@ var populateBeerDB = function() {
         name: "Saison de Dottignies",
         picture: "dottignies.png",
         abv: "6.0",
-        brewery: "?",
+        brewery: "Brouwerij De Ranke",
         beernr: "4"
     },
     {
@@ -318,53 +318,67 @@ var populateBeerDB = function() {
         beernr: "5"
     },
     {
-        name: "Mysingen Midvinterbrygd",
-        picture: "mysingen.jpg",
-        abv: "6.0",
-        brewery: "Nynäshamns Ångbryggeri AB",
-        beernr: "6"
-    },
-    {
         name: "K:rlek vår/sommar 2013",
         picture: "krlek13.png",
         abv: "5.5",
         brewery: "Mikkeller",
-        beernr: "7"
+        beernr: "6"
     },
     {
         name: "Sans Frontier",
         picture: "frontier.png",
         abv: "7.0",
         brewery: "To Øl",
-        beernr: "8"
+        beernr: "7"
     },
     {
         name: "Spontan Cherry Fredriksdal",
         picture: "spontan.png",
         abv: "6.2",
         brewery: "Mikkeller",
-        beernr: "9"
+        beernr: "8"
     },
     {
         name: "Valeir Blonde",
         picture: "valeir.png",
         abv: "6.5",
-        brewery: "?",
-        beernr: "10"
+        brewery: "Brouwerij Contreras",
+        beernr: "9"
     },
     {
         name: "Tindved",
         picture: "tindved.png",
         abv: "7.0",
         brewery: "Nøgne Ø",
-        beernr: "11"
+        beernr: "10"
     },
     {
         name: "Bedarö Bitter",
         picture: "bedaro.png",
         abv: "4.5",
         brewery: "Nynäshamns Ångbryggeri",
+        beernr: "11"
+    },
+    {
+        name: "Dead Guy Abe",
+        picture: "dga.jpg",
+        abv: "?",
+        brewery: "G.I.B.B",
         beernr: "12"
+    },
+    {
+        name: "Playtime Belgian DIPA",
+        picture: "playtime.jpg",
+        abv: "11.5",
+        brewery: "G.I.B.B",
+        beernr: "13"
+    },
+    {
+        name: "Shipwreck Saison",
+        picture: "shipwreck.jpg",
+        abv: "4.8",
+        brewery: "G.I.B.B",
+        beernr: "14"
     }];
 
     db.collection('beers', function(err, collection) {
