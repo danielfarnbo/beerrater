@@ -1,6 +1,6 @@
 var self = this,
-storageKey = 'LUDDEDRGD',
-apiIp = 'localhost',
+storageKey = 'JB13DEV2',
+apiIp = '10.0.1.5',
 userObject;
 
 $(document).ready( function(){
@@ -10,8 +10,8 @@ $(document).ready( function(){
 	var jqxhrGetBeers = $.get("http://" + apiIp +":3000/beers/", function(beerList) {
 			beerCollection.populateCollection(beerList);
 			self.applicationStartup();
-		}).error(function() {
-			console.log("error");
+		}).error(function(err) {
+			console.log("error", err);
 		});
 	
 	self.beerHolder = $("#beer");
@@ -69,7 +69,7 @@ function onUpdate(){
 function doLogin(msg) {
     var inputName;
     do {
-        inputName=prompt(msg || 'Vad heter du?');
+        inputName = prompt(msg || 'Vad heter du?');
 	} while(inputName.length < 2);
 	console.log('do login');
 	var newUser = {name: inputName},
@@ -80,7 +80,7 @@ function doLogin(msg) {
 			if($.jStorage.get(storageKey)) { $.jStorage.deleteKey(storageKey); }
 			$.jStorage.set(storageKey, data);
 			userObject = data;
-
+			location.reload();
 			return userObject;
 		} else {
 			alert('Något gick fel. Laddar om sidan.');

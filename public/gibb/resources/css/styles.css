@@ -93,11 +93,9 @@ select{
 }
 
 #beerIndex li img{
-	margin-top:10px; 
-	margin-left:25%;
-	margin-right:25%;
-	height:auto;
-	width: 50%;
+	margin-left: 36%;
+	height: auto;
+	width: 25%;
 }
 
 #beerIndex li p{
@@ -115,9 +113,10 @@ select{
 	height:100%;
 }
 
-a:active  { color:#000; }
-a:visited { color:#000; }
-a:hover   { color:#000; }
+a { color:#000; }
+a:active  { color: #000; }
+a:visited { color: #000; }
+a:hover   { color: #000; }
 
 #beer{
 	text-align:center;
@@ -179,91 +178,8 @@ a:hover   { color:#000; }
 	font-family: 'SFShaiFontaiExtendedRegular'
 }
 
-.beercrop{
-	overflow: hidden;
-}
-
-.beerbeerimage{
-	margin-top: -40px;
-}
-
-/* HACK, REMOVE WHEN CHANGING BEERS */
-.beerbeerimg-4{
-	margin-top: -18px;
-}
-.beerbeerimg-5{
-	margin-top: -10px;
-}
-.beerbeerimg-7{
-	margin-top: -29px;
-}
-.beerbeerimg-8{
-	margin-top: -33px;
-}
-.beerbeerimg-12{
-	margin-top: -10px;
-}
-.beerbeerimg-13{
-	margin-top: 0;
-}
-.beerbeerimg-14{
-	margin-top: 0;
-}
 .indexcrop{
-	overflow: hidden;
-}
-
-#beerIndex li img.indexbeerimage{
-	margin-top: -10px;
-}
-
-#beerIndex li .beerimg-12 img.indexbeerimage{
-	margin-top: 0;
-}
-
-#beerIndex li .beerimg-13 img.indexbeerimage{
-	margin-top: 0;
-}
-
-#beerIndex li .beerimg-14 img.indexbeerimage{
-	margin-top: 0;
-}
-
-.beercopy-1{
-	color: #307b18;
-}
-.beercopy-2{
-	color: #233d7d;
-}
-.beercopy-3{
-	color: #924e9f;
-}
-.beercopy-4{
-	color: #792d25;
-}
-.beercopy-5{
-	color: #227370;
-}
-.beercopy-6{
-	color: #237d37;
-}
-.beercopy-7{
-	color: #b13f41;
-}
-.beercopy-8{
-	color: #307b18;
-}
-.beercopy-9{
-	color: #4a4da1;
-}
-.beercopy-10{
-	color: #247376;
-}
-.beercopy-11{
-	color: #9b601f;
-}
-.beercopy-12, .beercopy-13, .beercopy-14{
-	color: #a53c4b;
+	padding-bottom: 10px;
 }
 
 @font-face {

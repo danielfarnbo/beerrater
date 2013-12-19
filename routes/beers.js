@@ -3,7 +3,7 @@ var mongo = require('mongodb');
 var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure,
-    database = 'beerdb_sb13';
+    database = 'beerdb_dev2';
 
 var server = new Server('localhost', 27017, {auto_reconnect: true});
 db = new Db(database, server, {safe: true});
@@ -281,104 +281,98 @@ exports.updateRating = function(req, res) {
 // You'd typically not find this code in a real-life app, since the database would already exist.
 var populateBeerDB = function() {
 
+
     var beers = [
     {
-        name: "Utopias",
-        picture: "utopias.png",
-        abv: "27",
-        brewery: "Samuel Adams",
+        name: "Ayinger Winter-Bock",
+        picture: "img/ayinger.JPG",
+        abv: "6,7",
+        brewery: "Ayinger",
         beernr: "1"
     },
     {
-        name: "Envy",
-        abv: "6.5",
-        picture: "amager.png",
-        brewery: "Amager Brygghus",
+        name: "Electric Nurse Underbar Jul",
+        abv: "4,2",
+        picture: "img/electric.JPG",
+        brewery: "Dugges Ale- & Porterbryggeri",
         beernr: "2"
     },
     {
-        name: "Tjockhult Tjinook",
-        picture: "tjockhult.png",
-        abv: "5.1",
-        brewery: "Nynäshamns Ångbryggeri",
+        name: "Oppigårds Winter Ale",
+        picture: "img/oppigards.JPG",
+        abv: "5.3",
+        brewery: "Oppigårds",
         beernr: "3"
     },
     {
-        name: "Saison de Dottignies",
-        picture: "dottignies.png",
-        abv: "6.0",
-        brewery: "Brouwerij De Ranke",
+        name: "N'Ice Chouffe",
+        picture: "img/nice.JPG",
+        abv: "10.0",
+        brewery: "Brasserie d’Achouffe (Moortgat)",
         beernr: "4"
     },
     {
-        name: "Hell",
-        picture: "hell.png",
-        abv: "5.1",
-        brewery: "Jämtlands Bryggeri",
+        name: "Jólabjór",
+        picture: "img/olvisholt.JPG",
+        abv: "6,5",
+        brewery: "Ölvisholt Brugghús",
         beernr: "5"
     },
     {
-        name: "K:rlek vår/sommar 2013",
-        picture: "krlek13.png",
-        abv: "5.5",
+        name: "Mikkeller Via Til Fra",
+        picture: "img/mikkellerv.JPG",
+        abv: "8.0",
         brewery: "Mikkeller",
         beernr: "6"
     },
     {
-        name: "Sans Frontier",
-        picture: "frontier.png",
-        abv: "7.0",
-        brewery: "To Øl",
+        name: "Mikkeller Santa's Little Helper",
+        picture: "img/mikkellers.JPG",
+        abv: "9.1",
+        brewery: "Mikkeller",
         beernr: "7"
     },
     {
-        name: "Spontan Cherry Fredriksdal",
-        picture: "spontan.png",
-        abv: "6.2",
+        name: "Evil Twin Christmas Eve at a NYC Hotel Room",
+        picture: "img/evil.JPG",
+        abv: "10.0",
         brewery: "Mikkeller",
         beernr: "8"
     },
     {
-        name: "Valeir Blonde",
-        picture: "valeir.png",
-        abv: "6.5",
-        brewery: "Brouwerij Contreras",
+        name: "Dugges Christmas Idjit!",
+        picture: "img/dugges.JPG",
+        abv: "9.5",
+        brewery: "Dugges Ale- & Porterbryggeri",
         beernr: "9"
     },
     {
-        name: "Tindved",
-        picture: "tindved.png",
-        abv: "7.0",
-        brewery: "Nøgne Ø",
+        name: "Ølfabrikken Jule Ale",
+        picture: "img/olfabrikken.JPG",
+        abv: "7.3",
+        brewery: "Harboes Bryggeri A/S",
         beernr: "10"
     },
     {
-        name: "Bedarö Bitter",
-        picture: "bedaro.png",
-        abv: "4.5",
-        brewery: "Nynäshamns Ångbryggeri",
+        name: "Sigtuna Christmas Scottish Strong Ale",
+        picture: "img/sigtuna.JPG",
+        abv: "9.3",
+        brewery: "Sigtuna Brygghus",
         beernr: "11"
     },
     {
-        name: "Dead Guy Abe",
-        picture: "dga.jpg",
-        abv: "?",
+        name: "Demokratisaison Nypon",
+        picture: "img/nypon.jpg",
+        abv: "5.3",
         brewery: "G.I.B.B",
         beernr: "12"
     },
     {
-        name: "Playtime Belgian DIPA",
-        picture: "playtime.jpg",
-        abv: "11.5",
+        name: "Blodbad",
+        picture: "img/blodbad.jpg",
+        abv: "6.1",
         brewery: "G.I.B.B",
         beernr: "13"
-    },
-    {
-        name: "Shipwreck Saison",
-        picture: "shipwreck.jpg",
-        abv: "4.8",
-        brewery: "G.I.B.B",
-        beernr: "14"
     }];
 
     db.collection('beers', function(err, collection) {
