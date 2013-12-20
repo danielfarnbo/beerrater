@@ -1,31 +1,41 @@
-var mongo = require('mongodb');
-
-var Server = mongo.Server,
-    Db = mongo.Db,
+var mongo = require('mongodb'),
+    db,
     BSON = mongo.BSONPure,
     database = 'beerdb_dev2';
 
-var server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db(database, server, {safe: true});
+    // Here we find an appropriate database to connect to, defaulting to
+// localhost if we don't find one.
+var uristring =
+process.env.MONGOLAB_URI ||
+process.env.MONGOHQ_URL ||
+'mongodb://localhost/' + database;
 
-db.open(function(err, db) {
+// var server = new Server(uristring, 27017, {auto_reconnect: true});
+// db = new Db(database, server, {safe: true});
+
+mongo.Db.connect(uristring, function(err, beerdb) {
     if(!err) {
         console.log("Connected to " + database + " database");
-        db.collection('beers', {safe:true}, function(err, collection) {
+        beerdb.collection('beers', {safe:true}, function(err, collection) {
             if (err) {
                 console.log("The 'beers' collection doesn't exist. Creating it with sample data...");
                 populateBeerDB();
             }
         });
 
-        db.collection('ratings', {}, function(err, collection) {
+        beerdb.collection('ratings', {}, function(err, collection) {
             collection.ensureIndex({'user': 1, 'beernr': 1}, {unique: true});
         });
 
-        db.collection('users', {}, function(err, collection) {
+        beerdb.collection('users', {}, function(err, collection) {
             collection.ensureIndex({'name': 1}, {unique: true});
         });
 
+        db = beerdb;
+
+    }
+    else {
+        console.log(err);
     }
 });
 

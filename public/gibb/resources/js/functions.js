@@ -1,13 +1,13 @@
 var self = this,
 storageKey = 'JB13DEV2',
-apiIp = '10.0.1.5',
+apiIp = window.location.host,
 userObject;
 
 $(document).ready( function(){
 
 	window.beerCollection = new BeerCollection();
 	window.beerCollection.on("updateBeer", onUpdate);
-	var jqxhrGetBeers = $.get("http://" + apiIp +":3000/beers/", function(beerList) {
+	var jqxhrGetBeers = $.get("http://" + apiIp +"/beers/", function(beerList) {
 			beerCollection.populateCollection(beerList);
 			self.applicationStartup();
 		}).error(function(err) {
@@ -73,7 +73,7 @@ function doLogin(msg) {
 	} while(inputName.length < 2);
 	console.log('do login');
 	var newUser = {name: inputName},
-	jqxhrPost = $.post("http://" + apiIp +":3000/users/", newUser, function(data) {
+	jqxhrPost = $.post("http://" + apiIp +"/users/", newUser, function(data) {
 		if (data.error) {
 			doLogin('Namnet upptaget, välj ett annat. ');
 		} else if (data.name && data._id) {
@@ -97,7 +97,7 @@ function checkLogin() {
 	//console.log(user);
 
 	if (user) {
-		var jqxhrGet = $.get("http://" + apiIp +":3000/users/" + user._id, function(data) {
+		var jqxhrGet = $.get("http://" + apiIp +"/users/" + user._id, function(data) {
 			if(data && data.name && data._id) {
 				userObject = data;
 			} else {
