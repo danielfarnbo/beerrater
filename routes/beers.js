@@ -1,7 +1,7 @@
 var mongo = require('mongodb'),
     db,
     BSON = mongo.BSONPure,
-    database = 'beerdb_jb13';
+    database = 'beerdb_jb13_prod';
 
     // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
